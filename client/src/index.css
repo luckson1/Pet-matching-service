@@ -1,0 +1,296 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro&display=swap');
+
+html , body {
+ margin: 0;
+ padding: 0;
+ text-align: center
+}
+*{
+  font-family: "Readex Pro", sans-serif;
+}
+
+.primary-button {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 15px;
+  background: linear-gradient(45deg, rgb(254, 48, 114), rgb(255, 89, 64));
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+}
+
+
+
+.primary-button:hover {
+  background: linear-gradient(260deg, rgb(254, 48, 114), rgb(255, 89, 64))
+}
+
+.primary-title {
+  color: rgb(255, 255, 255);  
+  font-size: 90px;
+  text-align: center
+ 
+}
+
+
+.secondary-button {
+  color: rgb(121, 119, 119);
+  background-color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: solid 2px rgb(121, 119, 119);
+  margin: 6px;
+}
+
+.secondary-button:hover {
+  color:rgb(48, 48,48) ;
+  border: solid 2 px rgb(48, 48,48) ;
+}
+
+.form-validation {
+  margin: 5px;
+  color: rgb(255, 0, 0);
+  font-size: 15px;
+  
+}
+
+/* -------NavBar------------- */
+
+nav{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+nav .logo-container{
+  width:100%
+}
+nav .nav-button{
+  color: rgb(254, 48, 114);
+  background-color: rgb(255, 255, 255);
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border:none;
+  margin:10px
+
+
+}
+
+nav .nav-button :disabled {
+  background-color: rgb(189, 180, 180);
+  color: rgb(94, 86, 89);
+}
+nav .logo-container .logo{
+  width: 90px;
+  margin-top: 10px;
+ margin-left: 0;
+}
+
+
+
+/* -------Home Page------- */
+
+.overlay {
+  width: 100vw;
+  height:100vh;
+  position: fixed;
+  background: rgb(226, 220, 220)
+}
+
+.home {
+  margin-top: 40vh;
+}
+
+/* -----authmodal---------- */
+
+.auth-modal{
+  position:absolute;
+  left: 0;
+  right: 0;
+  top: 50px;
+  margin-left: auto;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 360px;
+  height: 600px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 40px;
+
+}
+
+.auth-modal .close-icon {
+  float: right
+}
+
+.auth-modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-modal input  {
+  padding: 8px;
+  margin: 8px;
+  font-size: 17 px;
+}
+
+
+
+
+
+/* ---------Onboarding----------- */
+.onboarding {
+  border-top: solid 1px rgb(226, 223, 223);
+}
+
+.onboarding form {
+  display: flex;
+  justify-content: center;
+}
+.onboarding form section {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 50%;
+  text-align: start;
+}
+
+.onboarding form input {
+  padding: 10px 30px;
+  margin:20px 0px;
+  font-size: 15px;
+  border:solid 2px rgb(219, 219,219);
+  border-radius: 10px;
+}
+
+.onboarding form input::-webkit-outer-spin-button
+.onboarding form input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin:0;
+}
+
+.onboarding form textarea {
+  padding: 25px 30px;
+  margin:10px 0;
+  font-size: 15px;
+  border:solid 2px rgb(219, 219,219);
+  border-radius: 10px;
+}
+
+.onboarding form label {
+  margin: 10px 0px;
+}
+.onboarding form .multiple-input-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.onboarding form .multiple-input-container input {
+  margin-right:10px
+}
+.onboarding form .multiple-input-container input[type="radio"] {
+  display: none;
+}
+.onboarding form .multiple-input-container input[type="number"] {
+  width: 60px
+}
+
+.onboarding form .multiple-input-container label{
+  padding:5px;
+  border:solid 2px rgb(144,144,144);
+  border-radius: 10px;
+  transition: all 0.3s;
+  margin-right: 10px;
+}
+.onboarding form input[type='radio']:checked +label {
+  border: solid 2px rgb(219, 34, 22)
+}
+
+.onboarding form input[type='submit']:hover {
+  background-color: rgb(226,115,155);
+}
+.onboarding form input[type='submit']:active {
+  background-color: rgb(221, 15, 90);
+}
+
+/* ------------------Dashboard-------------------- */
+
+.dashboard{
+  display: flex;
+  justify-content: space-between;
+}
+.dashboard .swiper-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+ 
+
+  
+}
+
+.swipe {
+  position: absolute;
+}
+
+.card-container {
+  width: 50vw;
+  
+  height: 60vh;
+}
+
+.card {
+  background-color: #fff;
+  width: 50vw;
+  
+  height: 60vh;
+  box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
+  border-radius: 30px;
+  background-size: cover;
+  background-position: center;
+}
+
+.pet-container {
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+  rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  width: 40%;
+  text-align: left;
+  z-index: 1;
+}
+
+.pet {
+ 
+  height: 90vh;
+  margin: 10px 10px 0px 10px;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.pet-header{
+  text-align: center;
+  background-color: rgb(70, 81, 140);
+  color: rgb(255, 255, 255);
+  border: solid rgb(0, 0, 255) 2px;
+  border-radius: 10px; 
+
+}
+.pet-details {
+  padding: 20px;
+  border: solid rgb(217, 166, 72) 2px;
+  border-radius: 8px;
+margin-top: 15px;
+}
+.pet-background {
+  padding: 20px;
+  
+}
