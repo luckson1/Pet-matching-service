@@ -1,7 +1,10 @@
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Nav } from '../components/Nav';
+import { useDispatch, useSelector } from 'react-redux';
+import { createPetAction } from '../redux/petsSlices';
+import { useNavigate } from 'react-router';
 
 
 
@@ -18,6 +21,9 @@ const errorSchema = Yup.object().shape({
         .string()
         .required('Gender Required'),
     breed: Yup
+        .string()
+        .required('Breed Required'),
+    name: Yup
         .string()
         .required('Breed Required'),
     petType: Yup
@@ -37,7 +43,7 @@ const errorSchema = Yup.object().shape({
         .required('This Information is Required'),
     about: Yup.string()
         .min(20, 'About Me Information is Too Short!')
-        .max(300, 'About Me Information is Too Long!')
+        .max(1000, 'About Me Information is Too Long!')
         .required('About Me Information is Required'),
     image: Yup
         .string()
@@ -45,13 +51,27 @@ const errorSchema = Yup.object().shape({
 
 });
 export const PetOnboarding = () => {
-    const authToken = true
+    //get state from store
+    const user = useSelector((state) => {
+        return state?.users
+    })
+const pet= useSelector((state)=> {
+    return state?.pets
+})
+console.log(pet)
+    const { userAuth,  } = user;
+    const authToken = userAuth;
+const {isPetCreated}=pet
+    // dispatch create pet action 
+    const dispatch = useDispatch()
+
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
             age: '',
             gender: '',
-            breed:"",
+            name: "",
+            breed: "",
             petType: "",
             children: "",
             petTorrelance: "",
@@ -63,16 +83,26 @@ export const PetOnboarding = () => {
         },
         validationSchema: errorSchema,
         onSubmit: values => {
-            console.log(values)
+            dispatch(createPetAction(values))
         },
     });
-    console.log(formik.values)
+
+    // force navigation to dashboard
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (isPetCreated) {
+            navigate("/admin-dashboard")
+        }
+    }, [navigate, isPetCreated])
+
+
     return (<>
         <Nav
-            authToken />
+            authToken={authToken} />
         <div className='onboarding'>
             <h2>CREATE A PET PROFILE</h2>
-            <form onSubmit={formik.handleSubmit} >
+            <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
                 <section>
                     <label htmlFor="petType">Type of Pet?</label>
                     {/* errors */}
@@ -120,8 +150,22 @@ export const PetOnboarding = () => {
                             type="text"
                             placeholder="breed"
                         />
+                    </div>
 
-
+                    <label >Name</label>
+                    {/* errors */}
+                    <div className="form-validation">
+                        {formik.touched.name && formik.errors.name}
+                    </div>
+                    <div className='multiple-input-container'>
+                        <input
+                            id="name"
+                            value={formik.values.name}
+                            onChange={formik.handleChange("name")}
+                            onBlur={formik.handleBlur("name")}
+                            type="text"
+                            placeholder="name"
+                        />
 
                     </div>
                     <label >Approximate Age?</label>

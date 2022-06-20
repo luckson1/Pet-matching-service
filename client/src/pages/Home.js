@@ -1,18 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { Authmodal } from '../components/Authmodal';
 import { Nav } from '../components/Nav';
+import { logout } from '../redux/usersSlices';
+
 
 export const Home = () => {
 const [showModal, setShowModal]=useState(false)
 const [isSignUp, setIsSignUp]=useState(true)
-    const authToken = true
+
+
+// get data from store
+
+const user = useSelector((state) => {
+    return state?.users
+})
+const { userAppErr, userServerErr, userLoading, isLoggedIn, isRegistered,userAuth}=user;
+
+// force navigation once an action is performed
+const navigate=useNavigate();
+
+useEffect(() => {
+    if (isRegistered) {
+      return navigate('/onboarding')
+    }
+  }, [isRegistered, navigate])
+
+  useEffect(()=> {
+    if (isLoggedIn ){
+        return navigate('/dashboard')
+    } 
+    }, [isLoggedIn, navigate, userAuth])
+
+ 
+
+    const authToken = userAuth;
+
+    const dispatch= useDispatch()
     return (
         <div className='overlay'>
             <Nav setShowModal={setShowModal} authToken={authToken} showModal={showModal} setIsSignUp={setIsSignUp}/>
             <div>
                 <div className='home'>
-                    <h1 className="primary-title">Swipe Right</h1>
-                    <button className='primary-button' onClick={()=> {setShowModal(true); console.log("clicked")}}>
+                    <h1 className="primary-title">Get A Pet</h1>
+                    <button className='primary-button' onClick={()=> {authToken? dispatch(logout()): setShowModal(true)}}>
                         {authToken ? "Signout" : "create Account"}
                     </button>
                     {showModal && <Authmodal setShowModal={setShowModal} isSignUp={isSignUp} setIsSignUp={setIsSignUp}/>}
