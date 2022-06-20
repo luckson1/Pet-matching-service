@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Nav } from './components/Nav';
+import { AdminDashboard } from './pages/AdminDashboard';
 import { Dashboard } from './pages/Dashboard';
 import { Home } from './pages/Home';
 import { Onboarding } from './pages/Onboarding';
@@ -11,6 +12,7 @@ function App() {
          <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route exact path="/admin-dashboard" element={<AdminDashboard />} />
         <Route exact path="/onboarding" element={<Onboarding />} />
         <Route exact path="/pet-onboarding" element={<PetOnboarding />} />
       </Routes>

@@ -1,30 +1,16 @@
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Nav } from '../components/Nav';
+import { useDispatch, useSelector } from 'react-redux';
+import { createProfileAction } from '../redux/usersSlices';
+import { useNavigate } from 'react-router';
 
 
 
 
 const errorSchema = Yup.object().shape({
-    day: Yup
-        .number()
-        .moreThan(1, 'Invalide Date of Birth!')
-        .max(31, 'Invalide Date of Birth!')
-        .positive()
-        .required('Date of Birth Required'),
-    month: Yup
-        .number()
-        .moreThan(1, 'Invalide Month of Birth!')
-        .max(12, 'Invalide Month of Birth!')
-        .positive()
-        .required('Month of Birth Required'),
-    year: Yup
-        .number()
-        .max(2005, 'You must be over 18 years!')
-        .moreThan(1900, 'Invalide Year of Birth!')
-        .positive()
-        .required('Year of Birth Required'),
+
     gender: Yup
         .string()
         .required('Gender Required'),
@@ -45,81 +31,63 @@ const errorSchema = Yup.object().shape({
         .required('This Information is Required'),
     about: Yup.string()
         .min(20, 'About Me Information is Too Short!')
-        .max(300, 'About Me Information is Too Long!')
+        .max(1000, 'About Me Information is Too Long!')
         .required('About Me Information is Required'),
-   
+
 });
 export const Onboarding = () => {
-    const authToken = true
+    // dispatch action of creating a profile
+
+    const dispatch = useDispatch()
+
+
+
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
-            day: '',
-            month: '',
-            year: '',
+        
             gender: '',
             petPreference: "",
             children: "",
             petOwned: "",
             garden: "",
-            active:"",
+            active: "",
             about: "",
             image: ""
 
         },
         validationSchema: errorSchema,
         onSubmit: values => {
-            console.log(values)
+            dispatch(createProfileAction(values))
         },
     });
-    console.log(formik.values)
+
+
+    //get state from store 
+    const user = useSelector((state) => {
+        return state?.users
+    })
+
+    const { isProfilecreated } = user
+
+// force navagation to the dashboard page
+
+const navigate=useNavigate();
+
+useEffect(() => {
+    if (isProfilecreated) {
+      return navigate('/dashboard')
+    }
+  }, [isProfilecreated, navigate])
+
     return (<>
         <Nav
             authToken />
         <div className='onboarding'>
             <h2>CREATE PROFILE</h2>
-            <form onSubmit={formik.handleSubmit} >
+            <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
                 <section>
-                    <label >When is Your Birthday?</label>
-                    <div className='multiple-input-container'>
-                        <input
-                            id="day"
-                            value={formik.values.day}
-                            onChange={formik.handleChange("day")}
-                            onBlur={formik.handleBlur("day")}
-                            type="number"
-                            placeholder="DD"
-                        />
-                        {/* errors */}
-                        <div className="form-validation">
-                            {formik.touched.day && formik.errors.day}
-                        </div>
 
-                        <input
-                            id="month"
-                            value={formik.values.month}
-                            onChange={formik.handleChange("month")}
-                            onBlur={formik.handleBlur("month")}
-                            type="number"
-                            placeholder="MM"
-                        />
-                        {/* errors */}
-                        <div className="form-validation">
-                            {formik.touched.month && formik.errors.month}
-                        </div>
-                        <input
-                            id="year"
-                            value={formik.values.year}
-                            onChange={formik.handleChange("year")}
-                            onBlur={formik.handleBlur("year")}
-                            type="number"
-                            placeholder="YY"
-                        />
-                        {/* errors */}
-                        <div className="form-validation">
-                            {formik.touched.year && formik.errors.year}
-                        </div>
-                    </div>
                     <label>Select Your Gender</label>
                     {/* errors */}
                     <div className="form-validation">

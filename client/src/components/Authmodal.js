@@ -1,9 +1,10 @@
-import React from 'react';
 import { useFormik } from "formik"
 import * as Yup from 'yup'
+import { useDispatch } from 'react-redux';
+import { loginUserAction, registerUserAction } from '../redux/usersSlices';
 
 // use yup to handle errors 
-const errorSchema = Yup.object().shape({
+const SignInErrorSchema = Yup.object().shape({
     firstName: Yup.string()
         .min(2, 'First name Too Short!')
         .max(50, 'First name Too Long!')
@@ -18,27 +19,50 @@ const errorSchema = Yup.object().shape({
         .required('Password Required'),
         
 });
+const LoginErrorSchema = Yup.object().shape({
+   
+    email: Yup.string().email('Invalid email').required('Email Required'),
+    password: Yup.string()
+        .min(8, 'Passwords must be at least 8 characters long!')
+        .required('Password Required'),
+        
+});
 
 export const Authmodal = ({ setShowModal, isSignUp, setIsSignUp}) => {
 
+    // dispatch
+const dispatch=useDispatch()
+
+
+
     // use formik hook to handle form state 
-    const formik = useFormik({
-        initialValues: {
+   const formik = useFormik({
+       initialValues: {
             firstName: '',
             lastName: '',
             email: '',
-            password: ''
+            password: '',
+            gender: '',
+            petPreference: "",
+            children: "",
+            petOwned: "",
+            garden: "",
+            active: "",
+            about: "",
+            image: ""
+
         },
-        validationSchema: errorSchema,
+    
+        validationSchema: isSignUp? SignInErrorSchema: LoginErrorSchema,
         onSubmit: values => {
-            console.log(values)
+            isSignUp? dispatch(registerUserAction(values)):  dispatch(loginUserAction(values))
         },
-    });
+    })
     
     return (<div className='auth-modal'>
         <div onClick={() => { setShowModal(false); setIsSignUp(true) }} className="close-icon"><i className="bi bi-file-excel"></i></div>
-        <h2>{isSignUp ? "CREATE ACCOUNT" : "LOGIN"}</h2>
-        <p> By clicking Log In you are in agreement with our terms. Learn more from our Privacy Policy Page</p>
+        <h2>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h2>
+       { isSignUp && <p> By clicking Sign Up you are in agreement with our terms. Learn more from our Privacy Policy Page</p>}
         <form onSubmit={formik.handleSubmit} >
             { isSignUp && <input
                 value={formik.values.firstName}
@@ -48,9 +72,9 @@ export const Authmodal = ({ setShowModal, isSignUp, setIsSignUp}) => {
                 placeholder="First Name"
             />}
             {/* Err */}
-            {isSignUp && <div className="form-validation">
+            <div className="form-validation">
                 {formik.touched.firstName && formik.errors.firstName}
-            </div>}
+            </div>
             {isSignUp && <input
                 value={formik.values.lastName}
                 onChange={formik.handleChange("lastName")}
@@ -59,9 +83,9 @@ export const Authmodal = ({ setShowModal, isSignUp, setIsSignUp}) => {
                 placeholder="Last Name"
             />}
             {/* Err */}
-            {isSignUp && <div className="form-validation">
+            <div className="form-validation">
                 {formik.touched.lastName && formik.errors.lastName}
-            </div>}
+            </div>
             <input
                 value={formik.values.email}
                 onChange={formik.handleChange("email")}
@@ -88,7 +112,7 @@ export const Authmodal = ({ setShowModal, isSignUp, setIsSignUp}) => {
                 type="submit"
                 className="secondary-button"
             >
-                Sign Up
+                {isSignUp? "Sign Up": "Login"}
             </button>
         </form>
 
