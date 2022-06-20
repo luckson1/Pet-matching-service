@@ -5,6 +5,9 @@ export const AdminDashboard = () => {
     return(
     <section>
         <Nav authToken={authToken}/>
+        <div className="stats">
+
+        </div>
 
     </section>);
 };
