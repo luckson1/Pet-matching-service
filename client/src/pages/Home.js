@@ -33,17 +33,19 @@ useEffect(() => {
  
 
     const authToken = userAuth;
+    
     const isAdmin= userAuth?.user?.isAdmin
+    useEffect(()=> {
+        if (isLoggedIn && isAdmin){
+            return navigate('/admin-dashboard')
+        } 
+        }, [isLoggedIn, navigate, userAuth, isAdmin])
     useEffect(()=> {
         if (isLoggedIn && !isAdmin ){
             return navigate('/dashboard')
         } 
         }, [isLoggedIn, navigate, userAuth, isAdmin])
-        useEffect(()=> {
-            if (isLoggedIn && isAdmin){
-                return navigate('/admin-dashboard')
-            } 
-            }, [isLoggedIn, navigate, userAuth, isAdmin])
+       
             
 
    
