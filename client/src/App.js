@@ -26,9 +26,9 @@ function App() {
         <Route exact path="/onboarding" element={<ProtectedRoute>
             <Onboarding />
           </ProtectedRoute>} />
-        <Route exact path="/pet-onboarding" element={
-            <PetOnboarding/>
-        } />
+        <Route exact path="/pet-onboarding" element={<ProtectedRoute>
+            <PetOnboarding />
+          </ProtectedRoute>} />
         <Route exact path="/favourite-pets" element={<ProtectedRoute>
             <FavouritePets />
           </ProtectedRoute>} />
