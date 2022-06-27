@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { logout } from '../../redux/usersSlices';
-export const Nav = ({ authToken }) => {
+export const Nav2 = ({ authToken }) => {
     const dispatch= useDispatch()
     const navigate= useNavigate()
 

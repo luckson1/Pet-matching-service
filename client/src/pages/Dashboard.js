@@ -4,6 +4,9 @@ import TinderCard from 'react-tinder-card'
 import LoadingComponent from '../components/LoadingSpinner';
 
 import { Nav } from '../components/navigation/Nav';
+import { Nav2 } from '../components/navigation/Nav2';
+
+
 
 import { fetchPetsAction } from '../redux/petsSlices';
 import { updateMatchesAction } from '../redux/usersSlices';
@@ -53,9 +56,10 @@ if (direction==="right") { return dispatch(updateMatchesAction(pet))}
 
 //show Favourite Pets button
 const isFavPets=true
+const isAdmin=userAuth?.user?.isAdmin
   return (
     <>
-      <Nav authToken={authToken} isFavPets={isFavPets}/>
+    { isAdmin?   <Nav2 authToken={authToken} />: <Nav authToken={authToken} isFavPets={isFavPets}/>}
       <div className='info'>
                 <h3>Swipe Right to add a Pet to Favourites, or Left to Remove it from Dashboard</h3>
               </div>
