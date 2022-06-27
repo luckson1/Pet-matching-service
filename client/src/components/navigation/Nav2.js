@@ -1,8 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { logout } from '../redux/usersSlices';
-import logo from "./images/logo.png"
+import { logout } from '../../redux/usersSlices';
 export const Nav = ({ authToken }) => {
     const dispatch= useDispatch()
     const navigate= useNavigate()

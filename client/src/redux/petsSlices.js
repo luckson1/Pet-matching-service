@@ -79,7 +79,7 @@ const config = {
 
     });
 
-    //get all  pets by gender
+    //get   pets by gender
 
     export const fetchPetsAction = createAsyncThunk(
         "pets/fetch",
@@ -112,6 +112,39 @@ const config = {
     
     
         });
+ //get   pets by gender
+
+ export const fetchMatchedPetsAction = createAsyncThunk(
+    "matched-pets/fetch",
+    async (payload, { rejectWithValue, getState, dispatch }) => {
+        //get user token from store
+        const userToken = getState()?.users?.userAuth?.token;
+
+const config = {
+    headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+    },
+
+        };
+
+
+        try {
+            //make http call here
+
+            const { data } = await axios.get(`${BaseURL}/pets/matched`, config);
+            return data;
+
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
+        }
+
+
+
+    });
 
   
 
@@ -239,7 +272,7 @@ const PetsSlices = createSlice({
         })
 
 
-        //  fetch all pet pets 
+        //  fetch all pet pets by gender
         //handle pending state
         builder.addCase(fetchPetsAction.pending, (state, action) => {
             state.petLoading = true;
@@ -264,6 +297,32 @@ const PetsSlices = createSlice({
             state.petAppErr = action?.payload?.msg;
             state.petServerErr = action?.error?.msg;
         })
+//fetch matched pets
+        //handle pending state
+        builder.addCase(fetchMatchedPetsAction.pending, (state, action) => {
+            state.petLoading = true;
+            state.petAppErr = undefined;
+            state.petServerErr = undefined;
+
+        });
+        
+        
+        //hande success state
+        builder.addCase(fetchMatchedPetsAction.fulfilled, (state, action) => {
+            state.petsMatched = action?.payload;
+            state.petLoading = false;
+            state.petAppErr = undefined;
+            state.petServerErr = undefined;
+            
+        });
+        //hande rejected state
+
+        builder.addCase(fetchMatchedPetsAction.rejected, (state, action) => {
+            state.petLoading = false;
+            state.petAppErr = action?.payload?.msg;
+            state.petServerErr = action?.error?.msg;
+        })
+
 
         
         // edit a pet
@@ -297,7 +356,7 @@ const PetsSlices = createSlice({
 
                 //delete  an pet -action
 
-         // publish an pet
+         // delete a pet
         //handle pending state
         builder.addCase(deletepetAction.pending, (state, action) => {
             state.deletepetLoading = true;
