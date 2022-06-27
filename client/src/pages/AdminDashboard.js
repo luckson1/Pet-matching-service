@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav } from '../components/Nav2';
+import { Nav } from '../components/navigation/Nav2';
 export const AdminDashboard = () => {
     const authToken=true
     return(

@@ -139,6 +139,37 @@ export const createProfileAction = createAsyncThunk('user/create', async (payloa
 }
 );
 
+// update matches
+
+export const updateMatchesAction = createAsyncThunk('user/matches', async (payload, { rejectWithValue, getState, dispatch }) => {
+console.log(payload?._id)
+    // get user from store
+    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.isRegistered?.token 
+
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+        
+          
+        },
+    };
+
+    try {
+        //http call
+        const { data } = await axios.put(
+            `${BaseURL}/users/${payload?._id}`, payload, config);
+        return data;
+
+    } catch (error) {
+        if (!error?.response) {
+            throw error;
+        }
+        return rejectWithValue(error?.response?.data);
+    }
+}
+);
+
 //slices
 const userLoginFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : undefined;
 const usersSlices = createSlice({
@@ -256,6 +287,34 @@ const usersSlices = createSlice({
             state.createProfileLoading = false;
             state.createProfileAppErr = action?.payload?.msg;
             state.createProfileServerErr = action?.error?.msg;
+        });
+
+        /// handle updating ofmatched pets
+
+
+          // handle pending state
+          builder.addCase(updateMatchesAction.pending, (state, action) => {
+            state.matchPetLoading = true;
+            state.matchPetAppErr = undefined;
+            state.matchPetServerErr = undefined;
+        });
+     
+
+        //hande success state
+        builder.addCase(updateMatchesAction.fulfilled, (state, action) => {
+            state.updatedMatches = action?.payload;
+            state.matchPetLoading = false;
+            state.matchPetAppErr = undefined;
+            state.matchPetServerErr = undefined;
+         
+        });
+        //hande rejected state
+
+        builder.addCase(updateMatchesAction.rejected, (state, action) => {
+
+            state.matchPetLoading = false;
+            state.matchPetAppErr = action?.payload?.msg;
+            state.matchPetServerErr = action?.error?.msg;
         });
 
 

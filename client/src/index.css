@@ -14,7 +14,7 @@ html , body {
   color: #fff;
   text-transform: uppercase;
   font-size: 20px;
-  background: linear-gradient(45deg, rgb(0, 128, 0) , rgb(255, 89, 64));
+  background: linear-gradient(70deg, rgb(70, 81, 140), rgb(0, 0, 255) );
   padding: 15px 30px;
   border-radius: 20px;
   border: none;
@@ -23,7 +23,8 @@ html , body {
 
 
 .primary-button:hover {
-  background: linear-gradient(260deg, rgb(0, 128, 0), rgb(0, 0, 255))
+  background: linear-gradient(100deg, rgb(0, 128, 0), rgb(70, 81, 140));
+  cursor:pointer
 }
 
 .primary-title {
@@ -49,6 +50,7 @@ html , body {
 .secondary-button:hover {
   color:rgb(48, 48,48) ;
   border: solid 2 px rgb(48, 48,48) ;
+  cursor:pointer
 }
 
 .form-validation {
@@ -62,37 +64,72 @@ html , body {
 
 nav {
   width: 100%;
+  height: 60px;
   display: flex;
   justify-content: space-between;
 }
 
 nav .logo-container {
   width: 170px;
-  margin: 15px;
+  margin: 8px;
+  cursor:pointer
 }
 nav .nav-button{
   color: rgb(255, 255, 255);
   background-color: rgb(70, 81, 140);
-  font-size: 16px;
-  padding: 10px 20px;
+  font-size: 14px;
+  padding: 10px 8px;
   border-radius: 10px;
   border:none;
-  margin:25px
+  margin:10px;
+  -webkit-animation: bounce .73s infinite alternate;
+  -moz-animation: bounce .73s infinite alternate;
+  animation: bounce .73s infinite alternate;
+  
 
 
 }
-nav .nav-button:hover {
-  background-color:  rgb(0, 128, 0);
+@-webkit-keyframes bounce {
+  to { -webkit-transform: scale(1.2); }
+}
+@-moz-keyframes bounce {
+  to { -moz-transform: scale(1.2); }
+}
+@keyframes bounce {
+  to { transform: scale(1.2); }
+}
+nav  .nav-button:hover {
+  background-color:  hsl(120, 100%, 25%);
   color: rgb(94, 86, 89);
+  cursor:pointer
+ 
 }
+
+nav .nav-btn{
+  color: rgb(255, 255, 255);
+  background-color: rgb(70, 81, 140);
+  font-size: 16px;
+  padding: 10px 8px;
+  border-radius: 10px;
+  border:none;
+  margin:10px;}
+
+  nav  .nav-btn:hover {
+    background-color:  hsl(120, 100%, 25%);
+    color: rgb(94, 86, 89);
+    cursor:pointer
+   
+  }
+
 nav .logout-button{
   color: rgb(255, 255, 255);
   background-color: rgb(255, 0, 0);
   font-size: 16px;
-  padding: 10px 20px;
+  padding: 10px 8px;
   border-radius: 10px;
   border:none;
-  margin:25px
+  margin:10px;
+  cursor:pointer
 
 
 }
@@ -112,11 +149,12 @@ nav .logo-container .logo{
   width: 100vw;
   height:100vh;
   position: fixed;
-  background:  url("./components/images/dog-illust.svg")
+  background:  url("./components/images/Dog.jpg");
+  background-size:contain;
 }
 
 .home {
-  margin-top: 32vh;
+  margin-top: 15vh;
 }
 
 /* -----authmodal---------- */
@@ -131,8 +169,8 @@ nav .logo-container .logo{
   margin-right: auto;
   max-width: 360px;
   height: 600px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
+  background-color: rgb(251, 251, 255);
+  border-radius: 20px;
   padding: 40px;
 
 }
@@ -164,6 +202,7 @@ nav .logo-container .logo{
 .onboarding form {
   display: flex;
   justify-content: center;
+  padding: 30px;
 }
 .onboarding form section {
   display: flex;
@@ -233,9 +272,12 @@ margin:0;
 
 /* ------------------Dashboard-------------------- */
 
+/* -----desktop---- */
 .dashboard{
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .dashboard .swiper-container {
   width: 60%;
@@ -244,6 +286,8 @@ margin:0;
   justify-content: center;
   align-items: center;
   height: 80vh;
+  min-width: 500px;
+
  
 
   
@@ -257,9 +301,11 @@ margin:0;
   width: 50vw;
   
   height: 60vh;
+  min-width: 400px
 }
 
 .card {
+  
   background-color: #fff;
   width: 50vw;
   
@@ -268,6 +314,7 @@ margin:0;
   border-radius: 30px;
   background-size: cover;
   background-position: center;
+  min-width: 400px
 }
 
 .pet-container {
@@ -277,6 +324,9 @@ margin:0;
   width: 40%;
   text-align: left;
   z-index: 1;
+  min-width: 450px;
+  margin-top:30px;
+  border-radius: 20px;
 }
 
 .pet {
@@ -286,6 +336,7 @@ margin:0;
   
   display: flex;
   flex-direction: column;
+  min-width: 400px;
 }
 
 .pet-header{
@@ -297,12 +348,218 @@ margin:0;
 
 }
 .pet-details {
-  padding: 20px;
+  padding: 10px;
   border: solid rgb(217, 166, 72) 2px;
   border-radius: 8px;
-margin-top: 15px;
+margin-top: 8px;
 }
 .pet-background {
-  padding: 20px;
+  padding: 10px;
   
+}
+
+
+ /* for mobile */
+ @media screen and (max-width: 767px) {
+  .dashboard{
+    display: flex;
+    flex-direction: column-reverse;
+  align-items:center;
+    justify-content:space-evenly;
+    flex-wrap: wrap;
+  }
+
+  .dashboard .swiper-container {
+  
+    height: 50vh;
+    margin-bottom: 30px;
+   
+  
+   
+  
+    
+  }
+ }
+
+
+
+/* ----------FavouritePet------- */
+.favpets {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+  justify-content: space-around;
+}
+.infocardContainer {
+  display: flex;
+  height: 250px;
+  width: 250px;
+  border-radius: 100%;
+  background: rgb(0,159,255);
+  background: linear-gradient(121deg, rgba(255,255,255,0) 13%, rgba(0,159,255,1) 100%);
+  transition: all 500ms ease-in;
+  transition-delay: 1s;
+  margin:auto;
+  margin-top: 10px;
+  --margin-top: 100px;
+}
+.infocardContainer:hover {
+  width: 500px;
+  border-radius: 100px 10px 100px 100px;
+  transition: all 1s ease-out;
+}
+
+.infocardContainer div {
+  color: white;
+  flex-shrink: 1;
+  width: 100%;
+  --background-color: green;
+}
+.infocardContainer div * {
+  display: flex;
+  --flex: inherit;
+  overflow: hidden;
+  text-overflow: hidden;
+  --background-color: yellow;
+  color: white;
+  white-space: nowrap;
+  width: 0;
+  height: auto;
+  transition: all 450ms ease-in;
+  transition-delay: 1s;
+}
+.infocardContainer:hover div *{
+  --background-color: purple;
+  display: flex;
+  visibility: visible;
+  transition: all 1s ease-out;
+  transition-delay: 500ms;
+  width: 100%;
+  height: auto;
+}
+
+.infocardContainer #main, .infocardContainer #main img{
+  --background-color: red;
+  height: 250px;
+  width: 250px;
+  padding-right: 10px;
+  border-radius: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.infocardContainer #main img{
+  height: 230px;
+  width: 230px;
+  transition: none;
+  display: float;
+  position: relative;
+  border: 10px solid rgb(0,159,255);
+  margin: 0 0 0 0; padding: 0 0 0 0;
+}
+.infocardContainer #textbois {
+  position: relative;
+}
+.infocardContainer #textbois #hotlinks {
+  max-width: 80%;
+  max-height: 30px;
+  
+  --background-color: white;
+  position:absolute;
+  bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 13px;
+  font-size: 14px;
+}
+.infocardContainer #textbois #hotlinks * {
+  background-color: white;
+  max-width: 30px;
+  --margin: 0 1px 0 1px;
+  border-radius: 25px;
+  
+}
+
+
+
+/* -----------Whatsapp----- */
+
+ /* for desktop */
+
+ 
+      .whatsapp_float {
+          position: fixed;
+          width: 60px;
+          height: 60px;
+          bottom: 15%;
+          right: 40px;
+          background-color: #25d366;
+          color: #FFF;
+          border-radius: 100%;
+          text-align: center;
+          font-size: 30px;
+          box-shadow: 2px 2px 3px #999;
+          z-index: 100;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .whatsapp-icon {
+          margin-top: 16px;
+      }
+
+      /* for mobile */
+      @media screen and (max-width: 767px) {
+          .whatsapp-icon {
+              margin-top: 10px;
+          }
+
+          .whatsapp_float {
+              width: 50px;
+              height: 50px;
+              bottom: 10%;
+              right: 10px;
+              font-size: 22px;
+          }
+      }
+      @-webkit-keyframes bounce {
+        0% {
+    transform: scale(1,1) translate(0px, 0px);
+  }
+  
+  30%{
+    transform: scale(1,0.8) translate(0px, 10px); 
+  }
+
+  75%{
+    transform: scale(1,1.1) translate(0px, -25px); 
+  }
+  
+ 100% {
+    transform: scale(1,1) translate(0px, 0px);
+  }
+}
+
+@-webkit-keyframes bounce {
+  0% {
+transform: scale(1,1) translate(0px, 0px);
+}
+
+30%{
+transform: scale(1,0.8) translate(0px, 10px); 
+}
+
+75%{
+transform: scale(1,1.1) translate(0px, -25px); 
+}
+
+100% {
+transform: scale(1,1) translate(0px, 0px);
+}
+}
+
+.bounce {
+
+-webkit-animation: bounce 1s infinite;
 }

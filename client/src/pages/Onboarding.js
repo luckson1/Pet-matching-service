@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
-import { Nav } from '../components/Nav';
+import { Nav } from '../components/navigation/Nav';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProfileAction } from '../redux/usersSlices';
 import { useNavigate } from 'react-router';

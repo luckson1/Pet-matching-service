@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TinderCard from 'react-tinder-card'
+import LoadingComponent from '../components/LoadingSpinner';
 
-import { Nav } from '../components/Nav';
+import { Nav } from '../components/navigation/Nav';
 
 import { fetchPetsAction } from '../redux/petsSlices';
+import { updateMatchesAction } from '../redux/usersSlices';
 
 
 
@@ -13,10 +15,13 @@ import { fetchPetsAction } from '../redux/petsSlices';
 export const Dashboard = () => {
 
   const [lastDirection, setLastDirection] = useState()
+  const dispatch= useDispatch()
 
-  const swiped = (direction, nameToDelete) => {
-    console.log('removing: ' + nameToDelete)
-    setLastDirection(direction)
+  const swiped = (direction, pet) => {
+    console.log(direction)
+    setLastDirection(direction);
+    // call action to update matches when one swipes right
+if (direction==="right") { return dispatch(updateMatchesAction(pet))}
   }
 
   const outOfFrame = (name) => {
@@ -28,28 +33,37 @@ export const Dashboard = () => {
     return state?.users
   })
 
-  const pets = useSelector((state) => {
-    return state?.pets?.petsFetched
+  const petsState = useSelector((state) => {
+    return state?.pets
   })
+
+  const {petsFetched, petLoading}= petsState
+  const pets= petsFetched
 
   const { userAuth } = user;
   const authToken = userAuth;
 
-  const dispach = useDispatch()
+
 
   // fetch prefered pets
 
   useEffect(() => {
-    dispach(fetchPetsAction())
-  }, [dispach])
+    dispatch(fetchPetsAction())
+  }, [dispatch])
+
+//show Favourite Pets button
+const isFavPets=true
   return (
     <>
-      <Nav authToken={authToken} />
-      {pets?.map((pet) =>
+      <Nav authToken={authToken} isFavPets={isFavPets}/>
+      <div className='info'>
+                <h3>Swipe Right to add a Pet to Favourites, or Left to Remove it from Dashboard</h3>
+              </div>
+      {petLoading? <LoadingComponent />: pets?.map((pet) =>
         <TinderCard
           className='swipe'
           key={pet.name}
-          onSwipe={(dir) => swiped(dir, pet.name)}
+          onSwipe={(dir) => swiped(dir, pet)}
           onCardLeftScreen={() => outOfFrame(pet.name)}>
 
           <div className='dashboard' >
@@ -77,12 +91,14 @@ export const Dashboard = () => {
               </div>
             </div>
             <div className='swiper-container'>
+              
               <div className='card-container'>
 
 
 
                 <div style={{ backgroundImage: "url(" + pet.image + ")" }} className='card'>
                   <h3>{pet.name}</h3>
+                  
                 </div>
                 <div className='swipe-info'>
                   {lastDirection ? <p>You swiped {lastDirection}</p> : null}

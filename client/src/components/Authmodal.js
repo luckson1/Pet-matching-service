@@ -15,7 +15,10 @@ const SignInErrorSchema = Yup.object().shape({
         .required('Last name Required'),
     email: Yup.string().email('Invalid email').required('Email Required'),
     password: Yup.string()
-        .min(8, 'Passwords must be at least 8 characters long!')
+    .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
+        ,'password must contain 6 or more characters with at least one of each: uppercase, lowercase, number and special character'
+      )
+      
         .required('Password Required'),
         
 });
@@ -23,8 +26,7 @@ const LoginErrorSchema = Yup.object().shape({
    
     email: Yup.string().email('Invalid email').required('Email Required'),
     password: Yup.string()
-        .min(8, 'Passwords must be at least 8 characters long!')
-        .required('Password Required'),
+      .required('Password Required'),
         
 });
 
