@@ -10,7 +10,7 @@ import kitten from '../components/images/kitten.jpg';
 
 
 
-const editErrorSchema = Yup.object().shape({
+const onboardingErrorSchema = Yup.object().shape({
     age: Yup
         .number()
         .min(1, 'Invalide Age!')
@@ -52,66 +52,66 @@ const editErrorSchema = Yup.object().shape({
 
 });
 
-const onBoardingErrorSchema = Yup.object().shape({
-    age: Yup
-        .number()
-        .min(1, 'Invalide Age!')
-        .max(25, 'Too old!')
-        .positive()
-        .required('Age Required'),
+// const editErrorSchema = Yup.object().shape({
+//     age: Yup
+//         .number()
+//         .min(1, 'Invalide Age!')
+//         .max(25, 'Too old!')
+//         .positive()
+//         .required('Age Required'),
 
-    gender: Yup
-        .string()
-        .required('Gender Required'),
-    breed: Yup
-        .string()
-        .required('Breed Required'),
-    name: Yup
-        .string()
-        .required('Breed Required'),
-    petType: Yup
-        .string()
-        .required('Pet preference Required'),
-    children: Yup
-        .string()
-        .required('Children Information Required'),
-    petTorrelance: Yup
-        .string()
-        .required('Pets Information Required'),
-    garden: Yup
-        .string()
-        .required('Garden Information Required'),
-    active: Yup
-        .string()
-        .required('This Information is Required'),
-    about: Yup.string()
-        .min(20, 'About Me Information is Too Short!')
-        .max(1000, 'About Me Information is Too Long!')
-        .required('About Me Information is Required'),
+//     gender: Yup
+//         .string()
+//         .required('Gender Required'),
+//     breed: Yup
+//         .string()
+//         .required('Breed Required'),
+//     name: Yup
+//         .string()
+//         .required('Breed Required'),
+//     petType: Yup
+//         .string()
+//         .required('Pet preference Required'),
+//     children: Yup
+//         .string()
+//         .required('Children Information Required'),
+//     petTorrelance: Yup
+//         .string()
+//         .required('Pets Information Required'),
+//     garden: Yup
+//         .string()
+//         .required('Garden Information Required'),
+//     active: Yup
+//         .string()
+//         .required('This Information is Required'),
+//     about: Yup.string()
+//         .min(20, 'About Me Information is Too Short!')
+//         .max(1000, 'About Me Information is Too Long!')
+//         .required('About Me Information is Required'),
 
-});
+// });
 
 
 export const PetOnboarding = () => {
-    const isEdit=true
-    
+
     //get state from store
     const user = useSelector((state) => {
         return state?.users
     })
-const pet= useSelector((state)=> {
-    return state?.pets
-})
+    const pet = useSelector((state) => {
+        return state?.pets
+    })
+    const { isPetCreated } = pet
 
-    const { userAuth,  } = user;
+    const { userAuth } = user;
     const authToken = userAuth;
-const {isPetCreated}=pet
+
     // dispatch create pet action 
     const dispatch = useDispatch()
 
     // use formik hook to handle form state 
-    
-   
+
+
     const formik = useFormik({
         initialValues: {
             age: '',
@@ -127,14 +127,14 @@ const {isPetCreated}=pet
             image: ""
 
         },
-        validationSchema:  isEdit? editErrorSchema : onBoardingErrorSchema,
+        validationSchema: onboardingErrorSchema,
         onSubmit: values => {
             dispatch(createPetAction(values))
         },
     });
 
 
-    
+
     // force navigation to dashboard
     const navigate = useNavigate()
 
@@ -429,7 +429,7 @@ const {isPetCreated}=pet
 
 
 
-                  
+
 
 
                     <input type="submit" />
@@ -437,15 +437,15 @@ const {isPetCreated}=pet
                 </section>
 
                 <section>
-                <label
+                    <label
 
-htmlFor="about">
-Profile Pic
-</label>
+                        htmlFor="about">
+                        Profile Pic
+                    </label>
 
 
-  {/* errors */}
-  <div className="form-validation">
+                    {/* errors */}
+                    <div className="form-validation">
                         {formik.touched.image && formik.errors.image}
                     </div>
 

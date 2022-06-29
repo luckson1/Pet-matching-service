@@ -18,13 +18,18 @@ const user = useSelector((state) => {
     return state?.users
 })
 const {isLoggedIn, isRegistered,userAuth}=user;
+console.log(user)
 
 // force navigation once an action is performed
 const navigate=useNavigate();
 
 useEffect(() => {
     if (isRegistered) {
-      return navigate('/onboarding')
+       
+      navigate('/onboarding');
+      window.location.reload();
+    
+
     }
   }, [isRegistered, navigate])
 

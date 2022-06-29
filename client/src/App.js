@@ -23,9 +23,8 @@ function App() {
         <Route exact path="/admin-dashboard" element={<AdminRoute>
             <AdminDashboard/>
           </AdminRoute>} />
-        <Route exact path="/onboarding" element={<ProtectedRoute>
-            <Onboarding />
-          </ProtectedRoute>} />
+        <Route exact path="/onboarding" element={
+            <Onboarding />} />
         <Route exact path="/pet-onboarding" element={<ProtectedRoute>
             <PetOnboarding />
           </ProtectedRoute>} />

@@ -12,11 +12,11 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp,isDashboar
            <div className="logo-container">
                 <img className='logo' src={logo} alt="logo" onClick={() => { navigate("/")}} />
             </div>
-            {authToken && isFavPets? <button className='nav-button' onClick={() => { navigate("/favourite-pets")}} disabled={showModal}><i class="bi bi-eye"></i> View Favourites</button>
+            {authToken && isFavPets? <button className='nav-button' onClick={() => { navigate("/favourite-pets")}} disabled={showModal}><i class="bi bi-eye"></i> Favourites</button>
             : null}
               {authToken && isDashboard? <button className='nav-btn' onClick={() => { navigate("/dashboard") }} >Dashboard</button>
             : null}
             {!authToken? <button className='nav-btn' onClick={() => { setShowModal(true); setIsSignUp(false) }} disabled={showModal}>Login</button>
-            : <button className='logout-button' onClick={() => { dispatch(logout())}} disabled={showModal}>Log Out</button>}
+            : <button className='logout-button' onClick={() => { dispatch(logout())}} disabled={showModal}>Logout</button>}
         </nav>);
 };

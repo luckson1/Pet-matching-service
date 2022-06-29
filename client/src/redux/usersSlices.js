@@ -4,6 +4,7 @@ import { BaseURL } from "../utils/BaseUrl";
 
 //action for redirection
 export const resetProfilecreated = createAction("user/created/reset")
+export const resetUserRegistered = createAction("user/registered/reset")
 //login action creation
 export const resetLoginAction = createAction("user/login/reset")
 export const registerUserAction = createAsyncThunk('user/register', async (payload, { rejectWithValue, getState, dispatch }) => {
@@ -24,6 +25,7 @@ export const registerUserAction = createAsyncThunk('user/register', async (paylo
 
         //save user into localstorage
         localStorage.setItem('userInfo', JSON.stringify(data))
+        dispatch(resetUserRegistered ())
         return data;
 
     } catch (error) {
@@ -112,7 +114,7 @@ export const fetchUserProfileAction = createAsyncThunk('user/profile', async (pa
 
 //create profile state
 export const createProfileAction = createAsyncThunk('user/create', async (payload, { rejectWithValue, getState, dispatch }) => {
-    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.isRegistered?.token 
+    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.userRegistered?.token 
     console.log(userToken)
     const config = {
         headers: {
@@ -144,7 +146,7 @@ export const createProfileAction = createAsyncThunk('user/create', async (payloa
 export const updateMatchesAction = createAsyncThunk('user/matches', async (payload, { rejectWithValue, getState, dispatch }) => {
 console.log(payload?._id)
     // get user from store
-    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.isRegistered?.token 
+    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.userRegistered?.token 
 
     const config = {
         headers: {
@@ -186,13 +188,16 @@ const usersSlices = createSlice({
             state.userAppErr = undefined;
             state.userServerErr = undefined;
         });
-
+        builder.addCase(resetUserRegistered, (state, action) => {
+            state.isRegistered = true
+        })
         //hande success state
         builder.addCase(registerUserAction.fulfilled, (state, action) => {
-            state.isRegistered = action?.payload;
+            state.userRegistered = action?.payload;
             state.userLoading = false;
             state.userAppErr = undefined;
             state.userServerErr = undefined;
+            state.isRegistered = false
         });
         //handle rejected state
 

@@ -4,6 +4,7 @@ import { BaseURL } from "../utils/BaseUrl";
 
 // actions for redirect after action is completed
 export const resetPetCreated = createAction("pet/created/reset")
+
 export const resetPetUpdated = createAction("pet/updated/reset")
 export const resetPetPublished = createAction("pet/publish/reset")
 export const resetPetDeleted = createAction("pet/Deleted/reset")
