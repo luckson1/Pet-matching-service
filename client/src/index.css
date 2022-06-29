@@ -293,6 +293,9 @@ margin:0;
 /* ------------------Dashboard-------------------- */
 
 /* -----desktop---- */
+.info {
+  margin-bottom: 20px;
+}
 .dashboard{
   display: flex;
   flex-direction: row;
@@ -300,14 +303,14 @@ margin:0;
   flex-wrap: wrap;
 }
 .dashboard .swiper-container {
-  width: 60%;
+  width: 50vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 60vh;
  
-  min-width: 300px;
+  min-width: 400px;
 
  
 
@@ -328,7 +331,7 @@ margin:0;
 .card {
   
   background-color: #fff;
-  width: 30vw;
+  width: 40vw;
   
   height: 80vh;
   box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
@@ -342,7 +345,7 @@ margin:0;
   background-color: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
   rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  width: 40%;
+  width: 40vw;
   text-align: left;
   z-index: 1;
   min-width: 450px;
@@ -386,13 +389,13 @@ margin-top: 8px;
     display: flex;
     flex-direction: column-reverse;
   align-items:center;
-    justify-content:space-evenly;
+    justify-content:space-between;
     flex-wrap: wrap;
   }
 
   .dashboard .swiper-container {
   
-    height: 70vh;
+    height: 50%;
     width: 60vw;
  
   }
@@ -410,8 +413,11 @@ margin-top: 8px;
   height: 65vh;
   min-width: 400px
 }
- }
+.pet-container {
+   height: 40%;
+}
 
+ }
 
 
 /* ----------FavouritePet------- */

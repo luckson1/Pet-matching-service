@@ -61,12 +61,12 @@ const isAdmin=userAuth?.user?.isAdmin
     <>
     { isAdmin?   <Nav2 authToken={authToken} />: <Nav authToken={authToken} isFavPets={isFavPets}/>}
       <div className='info'>
-                <h3>Swipe Right to add a Pet to Favourites, or Left to Remove it from Dashboard</h3>
+                <h4>Swipe Right to add a Pet to Favourites, or Left to Remove it from Dashboard</h4>
               </div>
       {petLoading? <LoadingComponent />: pets?.map((pet) =>
         <TinderCard
           className='swipe'
-          key={pet.name}
+          key={pet.id}
           onSwipe={(dir) => swiped(dir, pet)}
           onCardLeftScreen={() => outOfFrame(pet.name)}>
 
