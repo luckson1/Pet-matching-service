@@ -4,6 +4,7 @@ import { BaseURL } from "../utils/BaseUrl";
 
 //action for redirection
 export const resetProfilecreated = createAction("user/created/reset")
+export const resetUserRegistered = createAction("user/registered/reset")
 //login action creation
 export const resetLoginAction = createAction("user/login/reset")
 export const registerUserAction = createAsyncThunk('user/register', async (payload, { rejectWithValue, getState, dispatch }) => {
@@ -24,6 +25,7 @@ export const registerUserAction = createAsyncThunk('user/register', async (paylo
 
         //save user into localstorage
         localStorage.setItem('userInfo', JSON.stringify(data))
+        dispatch(resetUserRegistered ())
         return data;
 
     } catch (error) {
@@ -112,7 +114,7 @@ export const fetchUserProfileAction = createAsyncThunk('user/profile', async (pa
 
 //create profile state
 export const createProfileAction = createAsyncThunk('user/create', async (payload, { rejectWithValue, getState, dispatch }) => {
-    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.isRegistered?.token 
+    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.userRegistered?.token 
     console.log(userToken)
     const config = {
         headers: {
@@ -128,6 +130,37 @@ export const createProfileAction = createAsyncThunk('user/create', async (payloa
         const { data } = await axios.put(
             `${BaseURL}/users`, payload, config);
           dispatch(resetProfilecreated()) 
+        return data;
+
+    } catch (error) {
+        if (!error?.response) {
+            throw error;
+        }
+        return rejectWithValue(error?.response?.data);
+    }
+}
+);
+
+// update matches
+
+export const updateMatchesAction = createAsyncThunk('user/matches', async (payload, { rejectWithValue, getState, dispatch }) => {
+console.log(payload?._id)
+    // get user from store
+    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.userRegistered?.token 
+
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+        
+          
+        },
+    };
+
+    try {
+        //http call
+        const { data } = await axios.put(
+            `${BaseURL}/users/${payload?._id}`, payload, config);
         return data;
 
     } catch (error) {
@@ -155,13 +188,16 @@ const usersSlices = createSlice({
             state.userAppErr = undefined;
             state.userServerErr = undefined;
         });
-
+        builder.addCase(resetUserRegistered, (state, action) => {
+            state.isRegistered = true
+        })
         //hande success state
         builder.addCase(registerUserAction.fulfilled, (state, action) => {
-            state.isRegistered = action?.payload;
+            state.userRegistered = action?.payload;
             state.userLoading = false;
             state.userAppErr = undefined;
             state.userServerErr = undefined;
+            state.isRegistered = false
         });
         //handle rejected state
 
@@ -256,6 +292,34 @@ const usersSlices = createSlice({
             state.createProfileLoading = false;
             state.createProfileAppErr = action?.payload?.msg;
             state.createProfileServerErr = action?.error?.msg;
+        });
+
+        /// handle updating ofmatched pets
+
+
+          // handle pending state
+          builder.addCase(updateMatchesAction.pending, (state, action) => {
+            state.matchPetLoading = true;
+            state.matchPetAppErr = undefined;
+            state.matchPetServerErr = undefined;
+        });
+     
+
+        //hande success state
+        builder.addCase(updateMatchesAction.fulfilled, (state, action) => {
+            state.updatedMatches = action?.payload;
+            state.matchPetLoading = false;
+            state.matchPetAppErr = undefined;
+            state.matchPetServerErr = undefined;
+         
+        });
+        //hande rejected state
+
+        builder.addCase(updateMatchesAction.rejected, (state, action) => {
+
+            state.matchPetLoading = false;
+            state.matchPetAppErr = action?.payload?.msg;
+            state.matchPetServerErr = action?.error?.msg;
         });
 
 
