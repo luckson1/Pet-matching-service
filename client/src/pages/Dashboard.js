@@ -66,7 +66,7 @@ const isAdmin=userAuth?.user?.isAdmin
       {petLoading? <LoadingComponent />: pets?.map((pet) =>
         <TinderCard
           className='swipe'
-          key={pet.id}
+          key={pet._id}
           onSwipe={(dir) => swiped(dir, pet)}
           onCardLeftScreen={() => outOfFrame(pet.name)}>
 
