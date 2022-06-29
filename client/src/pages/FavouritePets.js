@@ -28,7 +28,7 @@ const isDashboard=true
     {petLoading? <LoadingComponent />:
     <section>
         <div className='heading'>
-<h2>You Selected These Pets as Your Favourite by Swiping Right</h2>
+<h4>These are the Pets You Swiped as  Your Favourite. Click on the image for more information</h4>
         </div>
     <div className='favpets'>
         { petsMatched?.map(pet=> 
