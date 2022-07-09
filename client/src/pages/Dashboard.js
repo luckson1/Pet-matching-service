@@ -105,7 +105,7 @@ const isAdmin=userAuth?.user?.isAdmin
                   
                 </div>
                 <div className='swipe-info'>
-                  {lastDirection ? <p>You swiped {lastDirection}</p> : null}
+                  {lastDirection=== "right" ? <p>You added {pet?.name} to favourites</p> :  <p>You removed {pet?.name} from the dashboard</p> }
                 </div>
 
 
