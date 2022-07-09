@@ -5,6 +5,7 @@ import LoadingComponent from '../components/LoadingSpinner';
 
 import { Nav } from '../components/navigation/Nav';
 import { Nav2 } from '../components/navigation/Nav2';
+import { PetProfile } from '../components/PetProfile';
 
 
 
@@ -16,10 +17,10 @@ import { updateMatchesAction } from '../redux/usersSlices';
 
 
 export const Dashboard = () => {
-
+  const [showModal, setShowModal]=useState(true)
   const [lastDirection, setLastDirection] = useState()
   const dispatch = useDispatch()
-
+console.log(showModal)
   const swiped = (direction, pet) => {
     console.log(direction)
     setLastDirection(direction);
@@ -57,6 +58,7 @@ export const Dashboard = () => {
   //show Favourite Pets button
   const isFavPets = true
   const isAdmin = userAuth?.user?.isAdmin
+
   return (
     <>
       {isAdmin ? <Nav2 authToken={authToken} /> : <Nav authToken={authToken} isFavPets={isFavPets} />}
@@ -71,31 +73,10 @@ export const Dashboard = () => {
           onCardLeftScreen={() => outOfFrame(pet.name)}>
 
           <div className='dashboard' >
-            <div className='pet-container'>
-              <div className='pet'>
-                <div className='pet-header'>
-                  <h4>{pet?.name} {pet?.age} year old,  {pet?.gender} {pet?.breed} Breed</h4>
-                  <h4> </h4>
-                 <div className="details">
-                 <button className="details-button">View More Details</button>
-                 </div>
-                </div>
-                <div className='pet-details'>
-                  <p><i class="bi bi-emoji-smile"></i> {pet?.children === "yes" ? "I am friendly to kinds below 8 years" : "I have not been socialised with kids in the past"}</p>
-                  <p><i class="bi bi-emoji-smile"></i> {pet?.active === "yes" ? "I am  adventurerous and love playing a lot " : "I am a laid back dog.I may not be playful but I love talking walks"}</p>
-                  <p><i class="bi bi-emoji-smile"></i> {pet?.petTorrelance === "none" ? "I am not good with other pets"
-                    : pet?.petTorrelance === "both" ? "I can comfortably live with both cats and dogs"
-                      : `I am fine living with only ${pet?.petTorrelance}`}</p>
-                  <p><i class="bi bi-emoji-smile"></i> {pet?.garden === "yes" ? "My ideal home is the one with a secure compound with access to a garden" : "I don't require access to a garden but having one would be great"}</p>
-
-                </div>
-                <div className='pet-background'>
-                  <h4>Backgroud: </h4>
-                  <p> {pet?.about}</p>
-                </div>
-
-              </div>
-            </div>
+          {/* {showModal && <div className="auth-modal">
+              <PetProfile pet={pet} setShowModal={setShowModal}/>
+              </div>} */}
+           <PetProfile pet={pet}/>
             <div className='swiper-container'>
 
               <div className='card-container'>
@@ -114,6 +95,7 @@ export const Dashboard = () => {
               </div>
 
             </div>
+           
           </div>
         </TinderCard>)}
     </>);
