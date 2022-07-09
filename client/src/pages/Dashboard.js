@@ -18,13 +18,13 @@ import { updateMatchesAction } from '../redux/usersSlices';
 export const Dashboard = () => {
 
   const [lastDirection, setLastDirection] = useState()
-  const dispatch= useDispatch()
+  const dispatch = useDispatch()
 
   const swiped = (direction, pet) => {
     console.log(direction)
     setLastDirection(direction);
     // call action to update matches when one swipes right
-if (direction==="right") { return dispatch(updateMatchesAction(pet))}
+    if (direction === "right") { return dispatch(updateMatchesAction(pet)) }
   }
 
   const outOfFrame = (name) => {
@@ -40,8 +40,8 @@ if (direction==="right") { return dispatch(updateMatchesAction(pet))}
     return state?.pets
   })
 
-  const {petsFetched, petLoading}= petsState
-  const pets= petsFetched
+  const { petsFetched, petLoading } = petsState
+  const pets = petsFetched
 
   const { userAuth } = user;
   const authToken = userAuth;
@@ -54,16 +54,16 @@ if (direction==="right") { return dispatch(updateMatchesAction(pet))}
     dispatch(fetchPetsAction())
   }, [dispatch])
 
-//show Favourite Pets button
-const isFavPets=true
-const isAdmin=userAuth?.user?.isAdmin
+  //show Favourite Pets button
+  const isFavPets = true
+  const isAdmin = userAuth?.user?.isAdmin
   return (
     <>
-    { isAdmin?   <Nav2 authToken={authToken} />: <Nav authToken={authToken} isFavPets={isFavPets}/>}
+      {isAdmin ? <Nav2 authToken={authToken} /> : <Nav authToken={authToken} isFavPets={isFavPets} />}
       <div className='info'>
-                <h4>Swipe Right to add a Pet to Favourites, or Left to Remove it from Dashboard</h4>
-              </div>
-      {petLoading? <LoadingComponent />: pets?.map((pet) =>
+        <h4>Swipe Right to add a Pet to Favourites, or Left to Remove it from Dashboard</h4>
+      </div>
+      {petLoading ? <LoadingComponent /> : pets?.map((pet) =>
         <TinderCard
           className='swipe'
           key={pet.id}
@@ -74,17 +74,19 @@ const isAdmin=userAuth?.user?.isAdmin
             <div className='pet-container'>
               <div className='pet'>
                 <div className='pet-header'>
-                  <h4>{pet?.name} {pet?.age} year old </h4>
-                  <h4> {pet?.gender} {pet?.breed} Breed</h4>
-
+                  <h4>{pet?.name} {pet?.age} year old,  {pet?.gender} {pet?.breed} Breed</h4>
+                  <h4> </h4>
+                 <div className="details">
+                 <button className="details-button">View More Details</button>
+                 </div>
                 </div>
                 <div className='pet-details'>
                   <p><i class="bi bi-emoji-smile"></i> {pet?.children === "yes" ? "I am friendly to kinds below 8 years" : "I have not been socialised with kids in the past"}</p>
                   <p><i class="bi bi-emoji-smile"></i> {pet?.active === "yes" ? "I am  adventurerous and love playing a lot " : "I am a laid back dog.I may not be playful but I love talking walks"}</p>
                   <p><i class="bi bi-emoji-smile"></i> {pet?.petTorrelance === "none" ? "I am not good with other pets"
                     : pet?.petTorrelance === "both" ? "I can comfortably live with both cats and dogs"
-                    : `I am fine living with only ${pet?.petTorrelance}`}</p>
-                  <p><i class="bi bi-emoji-smile"></i> {pet?.garden==="yes"? "My ideal home is the one with a secure compound with access to a garden": "I don't require access to a garden but having one would be great"}</p>
+                      : `I am fine living with only ${pet?.petTorrelance}`}</p>
+                  <p><i class="bi bi-emoji-smile"></i> {pet?.garden === "yes" ? "My ideal home is the one with a secure compound with access to a garden" : "I don't require access to a garden but having one would be great"}</p>
 
                 </div>
                 <div className='pet-background'>
@@ -95,17 +97,17 @@ const isAdmin=userAuth?.user?.isAdmin
               </div>
             </div>
             <div className='swiper-container'>
-              
+
               <div className='card-container'>
 
 
 
                 <div style={{ backgroundImage: "url(" + pet.image + ")" }} className='card'>
                   <h3>{pet.name}</h3>
-                  
+
                 </div>
                 <div className='swipe-info'>
-                  {lastDirection=== "right" ? <p>Pet added to favourites</p> : lastDirection=== "left"? <p>Pet removedfrom the dashboard</p>: null }
+                  {lastDirection === "right" ? <p>Pet added to favourites</p> : lastDirection === "left" ? <p>Pet removedfrom the dashboard</p> : null}
                 </div>
 
 

@@ -43,9 +43,6 @@ const isDashboard=true
         <p>Gender: {pet?.gender}</p>
         <p>Breed: {pet?.breed}</p>        
         <p>Needs Garden: {pet?.garden}</p>
-        <div id="hotlinks">
-
-        </div>
     </div>
 </div>
 

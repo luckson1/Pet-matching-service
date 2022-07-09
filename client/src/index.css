@@ -18,6 +18,7 @@ html , body {
   padding: 15px 30px;
   border-radius: 20px;
   border: none;
+  cursor:pointer
 }
 
 
@@ -25,6 +26,19 @@ html , body {
 .primary-button:hover {
   background: linear-gradient(100deg, rgb(0, 128, 0), rgb(70, 81, 140));
   cursor:pointer
+}
+.details-button {
+  color: #fff;
+  font-size: 12px;
+  background: rgb(155, 155, 89);
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  cursor:pointer
+}
+.details-button:hover {
+ background: rgb(70, 81, 140);
+ color: rgb(70, 81, 140);;
 }
 
 .primary-title {
@@ -373,6 +387,9 @@ margin:0;
   border-radius: 10px; 
 
 }
+.details {
+  display: none;
+}
 .pet-details {
   padding: 10px;
   border: solid rgb(217, 166, 72) 2px;
@@ -427,6 +444,66 @@ margin-top: 8px;
   overflow: hidden;
 }
 
+ }
+
+ /* for mobile */
+ @media screen and (max-width: 420px) {
+  .dashboard{
+    display: flex;
+  flex-direction: row;
+  align-items:flex-start ;
+    justify-content:center;
+    flex-wrap: wrap;
+  }
+
+  .dashboard .swiper-container {
+  
+    height: 50vh;
+    width: 90vw;
+    margin-left: 15px;
+   
+  }
+
+.card-container {
+  width: 80vw;
+  
+  height: 100%;
+  min-width: 300px;
+  
+  
+}
+.card {
+  width: 80vw;
+  
+  height: 100%;
+  min-width: 300px;
+ 
+}
+
+.pet-container {
+margin-top: 0;
+  width: 60vw;
+  margin-left: 25px;
+  min-width: 320px;
+  font-size: 12px;
+  overflow: hidden;
+  height: 100px;
+  box-shadow:none;
+  transition: all 100ms ease-in;
+  padding-top: 0px;
+  
+}
+
+.pet-container:hover {
+  height: 100vh;
+  overflow:visible;
+  transition: all 200ms ease-out;
+  font-size: 12px;
+
+}
+.details {
+  display:contents;
+}
  }
 
 
