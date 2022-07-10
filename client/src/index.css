@@ -491,6 +491,7 @@ margin-top: 0;
   
   height: 100px;
   box-shadow:none;
+  transition-delay: 1s;
   transition: all 1000ms ease-in;
   padding-top: 0px;
   
