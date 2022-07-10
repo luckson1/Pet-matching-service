@@ -78,7 +78,7 @@ export const Dashboard = () => {
             <div className='pet-container-small-screen'>
               <div className='pet-header-small-screen'>
           
-                <button className="details-button" onClick={() => { setShowModal(true) }} >View Pet Profile</button>
+                <button className="primary-button" onClick={() => { setShowModal(true) }} >View Pet Profile</button>
               </div>
             </div>
             {showModal && <PetProfileModal setShowModal={setShowModal} pet={pet}  key={pet._id}/>}
