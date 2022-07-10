@@ -76,7 +76,7 @@ export const Dashboard = () => {
           <div className='dashboard' >
           <div className='pet-header-small-screen'>
           
-          <button className="primary-button" onClick={() => { setShowModal(true) }} >View Pet Profile</button>
+          <button className="primary-button" onClick={() => { setShowModal(true) }} onTouchStart={() => { setShowModal(true) }}>View Pet Profile</button>
         </div>
             <div className='pet-container-small-screen'>
             
