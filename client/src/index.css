@@ -213,11 +213,14 @@ nav .logo-container .logo{
   overflow: visible; */
 
 }
-
-.auth-modal .close-icon {
+.close-icon {
   float: right;
   font-size:x-large;
   margin-bottom: 20px;
+  -webkit-animation: bounce .73s infinite alternate;
+  -moz-animation: bounce .73s infinite alternate;
+  animation: bounce .73s infinite alternate;
+  
 }
 
 .auth-modal form {
