@@ -38,8 +38,8 @@ const isDashboard=true
     </div>
     <div id="textbois">
         <h3>{pet?.name}</h3>
-        <p>Friendly to children: {pet?.children}</p>
-        <p>Likes cats/dogs/both: {pet?.petTorrelance}</p>
+        <p>Friendly to a child: {pet?.children}</p>
+        <p>Likes cats/dogs: {pet?.petTorrelance}</p>
         <p>Gender: {pet?.gender}</p>
         <p>Breed: {pet?.breed}</p>        
         <p>Needs Garden: {pet?.garden}</p>

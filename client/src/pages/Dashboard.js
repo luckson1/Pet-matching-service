@@ -6,6 +6,7 @@ import LoadingComponent from '../components/LoadingSpinner';
 import { Nav } from '../components/navigation/Nav';
 import { Nav2 } from '../components/navigation/Nav2';
 import { PetProfile } from '../components/PetProfile';
+import { PetProfileModal } from '../components/PetProfileModal';
 
 
 
@@ -17,10 +18,10 @@ import { updateMatchesAction } from '../redux/usersSlices';
 
 
 export const Dashboard = () => {
-  const [showModal, setShowModal]=useState(true)
+  const [showModal, setShowModal] = useState(false)
   const [lastDirection, setLastDirection] = useState()
   const dispatch = useDispatch()
-console.log(showModal)
+  console.log(showModal)
   const swiped = (direction, pet) => {
     console.log(direction)
     setLastDirection(direction);
@@ -68,18 +69,26 @@ console.log(showModal)
       {petLoading ? <LoadingComponent /> : pets?.map((pet) =>
         <TinderCard
           className='swipe'
-          key={pet.id}
+          key={pet._id}
           onSwipe={(dir) => swiped(dir, pet)}
           onCardLeftScreen={() => outOfFrame(pet.name)}>
 
           <div className='dashboard' >
-          {/* {showModal && <div className="auth-modal">
-              <PetProfile pet={pet} setShowModal={setShowModal}/>
-              </div>} */}
-           <PetProfile pet={pet}/>
+
+            <div className='pet-container-small-screen'>
+              <div className='pet-header-small-screen'>
+          
+                <button className="details-button" onClick={() => { setShowModal(true) }} >View Pet Profile</button>
+              </div>
+            </div>
+            {showModal && <PetProfileModal setShowModal={setShowModal} pet={pet}  key={pet._id}/>}
+            <div className='pet-container'>
+
+              <PetProfile pet={pet}        key={pet._id}/>
+            </div>
             <div className='swiper-container'>
 
-              <div className='card-container'>
+              <div className='card-container'        key={pet._id}>
 
 
 
@@ -87,15 +96,15 @@ console.log(showModal)
                   <h3>{pet.name}</h3>
 
                 </div>
-                <div className='swipe-info'>
-                  {lastDirection === "right" ? <p>Pet added to favourites</p> : lastDirection === "left" ? <p>Pet removedfrom the dashboard</p> : null}
+                <div className='swipe-info'        key={pet._id}>
+                  {lastDirection === "right" ? <p>Pet added to favourites</p> : lastDirection === "left" ? <p>Pet removed from the dashboard</p> : null}
                 </div>
 
 
               </div>
 
             </div>
-           
+
           </div>
         </TinderCard>)}
     </>);
