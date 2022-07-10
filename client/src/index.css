@@ -491,7 +491,7 @@ margin-top: 0;
   
   height: 100px;
   box-shadow:none;
-  transition: all 200ms ease-in;
+  transition: all 1000ms ease-in;
   padding-top: 0px;
   
 }
