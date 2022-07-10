@@ -74,12 +74,12 @@ export const Dashboard = () => {
           onCardLeftScreen={() => outOfFrame(pet.name)}>
 
           <div className='dashboard' >
-
-            <div className='pet-container-small-screen'>
-              <div className='pet-header-small-screen'>
+          <div className='pet-header-small-screen'>
           
-                <button className="primary-button" onClick={() => { setShowModal(true) }} >View Pet Profile</button>
-              </div>
+          <button className="primary-button" onClick={() => { setShowModal(true) }} >View Pet Profile</button>
+        </div>
+            <div className='pet-container-small-screen'>
+            
             </div>
             {showModal && <PetProfileModal setShowModal={setShowModal} pet={pet}  key={pet._id}/>}
             <div className='pet-container'>
