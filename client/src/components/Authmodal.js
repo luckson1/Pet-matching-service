@@ -1,7 +1,8 @@
 import { useFormik } from "formik"
 import * as Yup from 'yup'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUserAction, registerUserAction } from '../redux/usersSlices';
+import DisabledButton from "./DisabledButton";
 
 // use yup to handle errors 
 const SignInErrorSchema = Yup.object().shape({
@@ -35,8 +36,12 @@ export const Authmodal = ({ setShowModal, isSignUp, setIsSignUp}) => {
     // dispatch
 const dispatch=useDispatch()
 
+// get data from store
 
-
+const user = useSelector((state) => {
+    return state?.users
+})
+const { userLoading, userServerErr, userAppErr}=user;
     // use formik hook to handle form state 
    const formik = useFormik({
        initialValues: {
@@ -65,7 +70,14 @@ const dispatch=useDispatch()
         <div onClick={() => { setShowModal(false); setIsSignUp(true) }} className="close-icon"><i className="bi bi-file-excel"></i></div>
         <h2>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h2>
        { isSignUp && <p> By clicking Sign Up you are in agreement with our terms. Learn more from our Privacy Policy Page</p>}
+       {/* Errors */}
+       {userAppErr || userServerErr ? (
+                <div className="form-validation" role="alert">
+                  {userServerErr} {userAppErr}
+                </div>
+              ) : null}
         <form onSubmit={formik.handleSubmit} >
+
             { isSignUp && <input
                 value={formik.values.firstName}
                 onChange={formik.handleChange("firstName")}
@@ -110,12 +122,12 @@ const dispatch=useDispatch()
             <div className="form-validation">
                 {formik.touched.password && formik.errors.password}
             </div>
-            <button
+        {userLoading? <DisabledButton /> :     <button
                 type="submit"
                 className="secondary-button"
             >
                 {isSignUp? "Sign Up": "Login"}
-            </button>
+            </button>}
         </form>
 
     </div>);

@@ -53,7 +53,7 @@ useEffect(() => {
     const dispatch= useDispatch()
     return (
         <div className='overlay'>
-            <Nav setShowModal={setShowModal} authToken={authToken} showModal={showModal} setIsSignUp={setIsSignUp} isDashboard={isDashboard}/>
+            <Nav setShowModal={setShowModal} authToken={authToken} showModal={showModal} setIsSignUp={setIsSignUp} isDashboard={isDashboard} />
             <div>
                 <div className='home'>
                     <h1 className="primary-title">Get A Pet</h1>

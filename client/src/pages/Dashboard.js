@@ -11,7 +11,7 @@ import { PetProfileModal } from '../components/PetProfileModal';
 
 
 import { fetchPetsAction } from '../redux/petsSlices';
-import { updateMatchesAction } from '../redux/usersSlices';
+import { fetchUserProfileAction, updateMatchesAction } from '../redux/usersSlices';
 
 
 
@@ -21,7 +21,6 @@ export const Dashboard = () => {
   const [showModal, setShowModal] = useState(false)
   const [lastDirection, setLastDirection] = useState()
   const dispatch = useDispatch()
-  console.log(showModal)
   const swiped = (direction, pet) => {
     console.log(direction)
     setLastDirection(direction);
@@ -32,6 +31,14 @@ export const Dashboard = () => {
   const outOfFrame = (name) => {
     console.log(name + ' left the screen!')
   }
+  // fetch prefered pets
+
+  useEffect(() => {
+    dispatch(fetchPetsAction())
+  }, [dispatch])
+  useEffect(() => {
+    dispatch(fetchUserProfileAction())
+  }, [dispatch])
 
   // get state from the store
   const user = useSelector((state) => {
@@ -42,19 +49,17 @@ export const Dashboard = () => {
     return state?.pets
   })
 
-  const { petsFetched, petLoading } = petsState
+  const { petsFetched, petLoading, petAppErr, petServerErr } = petsState
   const pets = petsFetched
 
-  const { userAuth } = user;
+  const { userAuth, userProfile } = user;
   const authToken = userAuth;
 
+  const isOnboarded=userProfile?.user?.petPreference
 
 
-  // fetch prefered pets
 
-  useEffect(() => {
-    dispatch(fetchPetsAction())
-  }, [dispatch])
+
 
   //show Favourite Pets button
   const isFavPets = true
@@ -64,8 +69,14 @@ export const Dashboard = () => {
     <>
       {isAdmin ? <Nav2 authToken={authToken} /> : <Nav authToken={authToken} isFavPets={isFavPets} />}
       <div className='info'>
-        <h4>Swipe Right to add a Pet to Favourites, or Left to Remove it from Dashboard</h4>
+       {isOnboarded?  <h4>Swipe Right to add a Pet to Favourites, or Left to Remove it from Dashboard</h4>: <p>Please complete the  <a href="/onboarding">registration process</a></p>}
       </div>
+        {/* Errors */}
+        {petAppErr || petServerErr ? (
+                <div className="form-validation" role="alert">
+                  {petServerErr} {petAppErr}
+                </div>
+              ) : null}
       {petLoading ? <LoadingComponent /> : pets?.map((pet) =>
         <TinderCard
           className='swipe'
