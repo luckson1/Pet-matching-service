@@ -230,10 +230,15 @@ nav .logo-container .logo{
 
 .auth-modal input  {
   padding: 8px;
-  margin: 8px;
+  margin: 10px;
   font-size: 17 px;
 }
-
+.toggle-icon {
+  margin-left: 300px;
+  margin-top: -38px;
+  cursor: pointer;
+  font-size: large;
+}
 
 
 

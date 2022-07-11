@@ -3,6 +3,7 @@ import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUserAction, registerUserAction } from '../redux/usersSlices';
 import DisabledButton from "./DisabledButton";
+import { useState } from "react";
 
 // use yup to handle errors 
 const SignInErrorSchema = Yup.object().shape({
@@ -32,7 +33,7 @@ const LoginErrorSchema = Yup.object().shape({
 });
 
 export const Authmodal = ({ setShowModal, isSignUp, setIsSignUp}) => {
-
+const [reveal, setReveal]=useState(false)
     // dispatch
 const dispatch=useDispatch()
 
@@ -115,9 +116,10 @@ const { userLoading, userServerErr, userAppErr}=user;
                 value={formik.values.password}
                 onChange={formik.handleChange("password")}
                 onBlur={formik.handleBlur("password")}
-                type="password"
+                type={reveal?"text":"password"}
                 placeholder="Password"
             />
+                <div className="toggle-icon"><i className={reveal? "bi bi-eye-slash ": "bi bi-eye "  }id="togglePassword" onClick={()=> setReveal(!reveal)}></i></div> 
             {/* Err */}
             <div className="form-validation">
                 {formik.touched.password && formik.errors.password}
