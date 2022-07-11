@@ -5,6 +5,7 @@ import { Nav } from '../components/navigation/Nav';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProfileAction } from '../redux/usersSlices';
 import { useNavigate } from 'react-router';
+import DisabledButton from '../components/DisabledButton';
 
 
 
@@ -68,7 +69,7 @@ export const Onboarding = () => {
         return state?.users
     })
 
-    const { isProfilecreated } = user
+    const { isProfilecreated, createProfileLoading, createProfileAppErr, createProfileServerErr} = user
 
 // force navagation to the dashboard page
 
@@ -349,10 +350,12 @@ useEffect(() => {
                     />
 
 
-                    <input type="submit" />
+                    {createProfileLoading?<DisabledButton />:<input type="submit" />}
 
                 </section>
-
+{createProfileServerErr || createProfileAppErr?  <div className="form-validation" role="alert">
+{createProfileServerErr} {createProfileAppErr}
+</div>: null}
                 <section>
 
 
