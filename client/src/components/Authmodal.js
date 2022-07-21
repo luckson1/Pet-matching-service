@@ -17,7 +17,7 @@ const SignInErrorSchema = Yup.object().shape({
         .required('Last name Required'),
     email: Yup.string().email('Invalid email').required('Email Required'),
     password: Yup.string()
-    .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
+    .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
         ,'password must contain 6 or more characters with at least one of each: uppercase, lowercase, number and special character'
       )
       
