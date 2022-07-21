@@ -55,7 +55,7 @@ export const Dashboard = () => {
   const { userAuth, userProfile } = user;
   const authToken = userAuth;
 
-  const isOnboarded=userProfile?.user?.petPreference
+  const isOnboarded = userProfile?.user?.petPreference
 
 
 
@@ -69,14 +69,14 @@ export const Dashboard = () => {
     <>
       {isAdmin ? <Nav2 authToken={authToken} /> : <Nav authToken={authToken} isFavPets={isFavPets} />}
       <div className='info'>
-       {isOnboarded?  <h4>Swipe Right to add a Pet to Favourites, or Left to Remove it from Dashboard</h4>: <p>Please complete the  <a href="/onboarding">registration process</a></p>}
+        {isOnboarded ? <h4>Swipe Right to add a Pet to Favourites, or Left to Remove it from Dashboard</h4> : <p>Please complete the  <a href="/onboarding">registration process</a></p>}
       </div>
-        {/* Errors */}
-        {petAppErr || petServerErr ? (
-                <div className="form-validation" role="alert">
-                  {petServerErr} {petAppErr}
-                </div>
-              ) : null}
+      {/* Errors */}
+      {petAppErr || petServerErr ? (
+        <div className="form-validation" role="alert">
+          {petServerErr} {petAppErr}
+        </div>
+      ) : null}
       {petLoading ? <LoadingComponent /> : pets?.map((pet) =>
         <TinderCard
           className='swipe'
@@ -85,21 +85,23 @@ export const Dashboard = () => {
           onCardLeftScreen={() => outOfFrame(pet.name)}>
 
           <div className='dashboard' >
-          <div className='pet-header-small-screen'>
-          
-          <button className="primary-button" onClick={() => { setShowModal(true) }} onTouchStart={() => { setShowModal(true) }}>View {pet?.name}'s Profile</button>
-        </div>
-            <div className='pet-container-small-screen'>
-            
+            <div className='pet-header-small-screen'>
+
+              <button className="primary-button" onClick={() => { setShowModal(true) }} onTouchStart={() => { setShowModal(true) }}>
+                View {pet?.name}'s Profile
+              </button>
             </div>
-            {showModal && <PetProfileModal setShowModal={setShowModal} pet={pet}  key={pet._id}/>}
+            <div className='pet-container-small-screen'>
+
+            </div>
+            {showModal && <PetProfileModal setShowModal={setShowModal} pet={pet} key={pet._id} />}
             <div className='pet-container'>
 
-              <PetProfile pet={pet}        key={pet._id}/>
+              <PetProfile pet={pet} key={pet._id} />
             </div>
             <div className='swiper-container'>
 
-              <div className='card-container'        key={pet._id}>
+              <div className='card-container' key={pet._id}>
 
 
 
@@ -107,7 +109,7 @@ export const Dashboard = () => {
                   <h3>{pet.name}</h3>
 
                 </div>
-                <div className='swipe-info'        key={pet._id}>
+                <div className='swipe-info' key={pet._id}>
                   {lastDirection === "right" ? <p>Pet added to favourites</p> : lastDirection === "left" ? <p>Pet removed from the dashboard</p> : null}
                 </div>
 

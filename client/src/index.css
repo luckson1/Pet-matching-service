@@ -381,6 +381,7 @@ margin:0;
 
   margin-top:30px;
   border-radius: 20px;
+  margin-left: 50px
 
 }
 
@@ -477,7 +478,7 @@ overflow: hidden;
  }
 
  /* for mobile */
- @media screen and (max-width: 500px) {
+ @media screen and (max-width: 800px) {
   .dashboard{
     display: flex;
   flex-direction: row;
