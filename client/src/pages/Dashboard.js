@@ -49,8 +49,7 @@ export const Dashboard = () => {
   const { petsFetched, petLoading, petAppErr, petServerErr } = petsState;
   const pets = petsFetched;
 
-  const { userAuth, userProfile } = user;
-  const authToken = userAuth;
+  const { userProfile } = user;
 
   const isOnboarded = userProfile?.user?.petPreference;
 
