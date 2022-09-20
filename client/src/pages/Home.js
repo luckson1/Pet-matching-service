@@ -53,11 +53,12 @@ useEffect(() => {
     const dispatch= useDispatch()
     return (
         <div className='overlay'>
-            <Nav setShowModal={setShowModal} authToken={authToken} showModal={showModal} setIsSignUp={setIsSignUp} isDashboard={isDashboard} />
+            <Nav setShowModal={setShowModal} showModal={showModal} setIsSignUp={setIsSignUp} isDashboard={isDashboard} />
             <div>
                 <div className='home'>
                     <h1 className="primary-title">Get A Pet</h1>
-                    <button className='primary-button' onClick={()=> {authToken? dispatch(logout()): setShowModal(true)}}>
+                    <button className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full mb-4  py-4 px-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                    onClick={()=> {authToken? dispatch(logout()): setShowModal(true)}}>
                         {authToken ? "Sign out" : "create Account"}
                     </button>
                     {showModal && <Authmodal setShowModal={setShowModal} isSignUp={isSignUp} setIsSignUp={setIsSignUp}/>}
