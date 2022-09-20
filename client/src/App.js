@@ -4,11 +4,13 @@ import ProtectedRoute from './components/navigation/protectedRoute';
 import NotAdmin from './components/notAdmin';
 import { Whatsapp } from './components/whatsapp';
 import { AdminDashboard } from './pages/AdminDashboard';
+import AdoptersData from './pages/AdoptersData';
 import { Dashboard } from './pages/Dashboard';
 import { FavouritePets } from './pages/FavouritePets';
 import { Home } from './pages/Home';
 import { Onboarding } from './pages/Onboarding';
 import { PetOnboarding } from './pages/PetOnboarding';
+import PetsData from './pages/PetsData';
 
 function App() {
   return (
@@ -30,6 +32,12 @@ function App() {
           </ProtectedRoute>} />
         <Route exact path="/favourite-pets" element={<ProtectedRoute>
             <FavouritePets />
+          </ProtectedRoute>} />
+          <Route exact path="/adopters" element={<ProtectedRoute>
+            <AdoptersData />
+          </ProtectedRoute>} />
+          <Route exact path="/all-pets" element={<ProtectedRoute>
+            <PetsData />
           </ProtectedRoute>} />
 
       </Routes>
