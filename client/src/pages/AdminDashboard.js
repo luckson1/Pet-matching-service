@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Nav } from "../components/navigation/Nav";
 import Adopter from "../components/images/Adopter.jpg";
 import Cat from "../components/images/Cat.jpg";
@@ -7,6 +7,7 @@ import AdminDashboardCard from "../components/AdminDashboardCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllpetsAction } from "../redux/petsSlices";
 import { fetchAllUsersAction } from "../redux/usersSlices";
+import { PetOnboarding } from "../components/PetOnboarding";
 export const AdminDashboard = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -14,6 +15,10 @@ export const AdminDashboard = () => {
     dispatch(fetchAllUsersAction());
   }, []);
 
+  const [showForm, setShowForm] = useState(false);
+  const closeFormHandler = () => {
+    setShowForm(false)
+  };
   const petsData = useSelector((state) => state?.pets?.allPets?.pets);
 
   const usersData = useSelector((state) => state?.users?.allUsers?.users);
@@ -42,7 +47,7 @@ export const AdminDashboard = () => {
 
   let catAdopterIds = [];
   catAdopters?.map((catAdopter) => catAdopterIds.push(catAdopter?._id));
-  console.log(catAdopterIds)
+
 
   // filter ids of those with no prefrence
   const noPreferenceAdopters = usersData?.filter(
@@ -56,7 +61,15 @@ export const AdminDashboard = () => {
   return (
     <section>
       <Nav />
-      <div className="mt-24 mb-5 mx-20 flex flex-row flex-wrap justify-center  gap-5 ">
+      <div className=" flex flex-row justify-end my-5  mx-24 lg:mx-48 mt-24">
+        <button
+          className=" bg-gradient-to-r from-green-500 via-emerald-200 to-teal-500 text-gray-900 font-bold rounded-lg py-1 px-1 md:py-2 md:px-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out animate-bounce"
+          onClick={() => setShowForm(true)}
+        >
+          Add Pet
+        </button>
+      </div>
+      <div className="mt-10 mb-5 mx-20 flex flex-row flex-wrap justify-center  gap-5 ">
         <AdminDashboardCard
           src={Adopter}
           title={`${dogAdopters?.length} Adopters Looking for a Dog`}
@@ -93,6 +106,11 @@ export const AdminDashboard = () => {
           state={catIds}
         />
       </div>
+      {showForm && (
+            <PetOnboarding
+              closeFormHandler={closeFormHandler}
+            />
+          )}
     </section>
   );
 };

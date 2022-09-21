@@ -12,16 +12,14 @@ function PetsList({ pets, setPets }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [selectedPet, setSelectedPet] = useState([]);
+  const closeFormHandler = () => {
+    setShowForm(false);
+    setIsEdit(false);
+  
+  };
   return (
     <>
-      <div className=" flex flex-row justify-end my-5  mx-24 lg:mx-48">
-        <button
-          className=" bg-gradient-to-r from-green-500 via-emerald-200 to-teal-500 text-gray-900 font-bold rounded-lg py-1 px-1 md:py-2 md:px-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out animate-bounce"
-          onClick={() => setShowForm(true)}
-        >
-          Add Pet
-        </button>
-      </div>
+   
       <div className="table text-left z-0">
         <ul className="responsive-table">
           <li className="table-header">
@@ -97,8 +95,7 @@ function PetsList({ pets, setPets }) {
           )}
           {showForm && (
             <PetOnboarding
-              setShowForm={setShowForm}
-              setIsEdit={setIsEdit}
+            closeFormHandler={closeFormHandler}
               isEdit={isEdit}
               setPets={setPets}
               pets={pets}

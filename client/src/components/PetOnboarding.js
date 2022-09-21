@@ -33,8 +33,7 @@ const onboardingErrorSchema = Yup.object().shape({
 export const PetOnboarding = ({
   isEdit,
   pet,
-  setIsEdit,
-  setShowForm,
+closeFormHandler,
   pets,
   setPets,
 }) => {
@@ -43,18 +42,14 @@ export const PetOnboarding = ({
     return state?.pets;
   });
   const { isPetCreated } = petData;
-  const closeFormHandler = () => {
-    setIsEdit(false);
-    setShowForm(false);
-  };
+
   // dispatch create pet action
   const dispatch = useDispatch();
   // create a new pet
   const createPetHandler = (values) => {
     dispatch(createPetAction(values));
     setPets([...pets, values]);
-    setIsEdit(false);
-    setShowForm(false);
+   closeFormHandler()
   };
 
   // edit a pet
@@ -62,8 +57,7 @@ export const PetOnboarding = ({
     dispatch(editPetsAction(values));
     const newList = pets.filter((p) => p?._id !== pet?._id);
     setPets([...newList, values]);
-    setIsEdit(false);
-    setShowForm(false);
+   closeFormHandler()
   };
 
   // use formik hook to handle form state
@@ -110,7 +104,7 @@ export const PetOnboarding = ({
             <p className="text-xl text-left">
               {isEdit ? "EDIT PET PROFILE" : "CREATE A PET PROFILE"}
             </p>
-            <MdCancel color="red" size={"30px"} onClick={closeFormHandler} />
+            <MdCancel color="red" size={"30px"} onClick={closeFormHandler} className="cursor-pointer" />
           </div>
 
           <form
