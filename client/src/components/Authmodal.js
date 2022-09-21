@@ -153,7 +153,7 @@ export const Authmodal = ({ setShowModal, isSignUp, setIsSignUp }) => {
         {userLoading ? (
           <DisabledButton />
         ) : (
-          <button type="submit" className="secondary-button">
+          <button type="submit" className="mt-5 py-2 px-20 border-solid bg-sky-600 rounded-3xl">
             {isSignUp ? "Sign Up" : "Login"}
           </button>
         )}
