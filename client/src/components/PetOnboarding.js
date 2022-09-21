@@ -98,13 +98,13 @@ closeFormHandler,
   return (
     <>
       <Nav />
-      <div className="bg-half-transparent  absolute top-0 right-0 z-50 fixed-modal">
-        <div className="onboarding /12 w-11/12 bg-indigo-50 shadow-2xl mt-24 rounded-xl mx-auto">
+      <div className="bg-white  absolute top-0 right-0 z-50 fixed-modal">
+        <div className="onboarding /12 w-11/12 bg-indigo-50 shadow-2xl mt-10 rounded-xl mx-auto">
           <div className="flex flex-row p-5 justify-between">
             <p className="text-xl text-left">
               {isEdit ? "EDIT PET PROFILE" : "CREATE A PET PROFILE"}
             </p>
-            <MdCancel color="red" size={"30px"} onClick={closeFormHandler} className="cursor-pointer" />
+            <MdCancel color="red" size={"40px"} onClick={closeFormHandler} className="cursor-pointer animate-spin" />
           </div>
 
           <form
