@@ -42,6 +42,7 @@ export const AdminDashboard = () => {
 
   let catAdopterIds = [];
   catAdopters?.map((catAdopter) => catAdopterIds.push(catAdopter?._id));
+  console.log(catAdopterIds)
 
   // filter ids of those with no prefrence
   const noPreferenceAdopters = usersData?.filter(

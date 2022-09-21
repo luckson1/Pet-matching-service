@@ -24,7 +24,7 @@ function PetsData() {
       let filteredPets = petsData?.filter((pet) =>
         selectedPetsIds?.includes(pet?._id)
       );
-      console.log(filteredPets);
+     
       setpets(filteredPets);
     }
   }, [petsData]);
