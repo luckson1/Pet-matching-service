@@ -9,7 +9,6 @@ import { Dashboard } from './pages/Dashboard';
 import { FavouritePets } from './pages/FavouritePets';
 import { Home } from './pages/Home';
 import { Onboarding } from './pages/Onboarding';
-import { PetOnboarding } from './pages/PetOnboarding';
 import PetsData from './pages/PetsData';
 
 function App() {
@@ -27,9 +26,6 @@ function App() {
           </AdminRoute>} />
         <Route exact path="/onboarding" element={
             <Onboarding />} />
-        <Route exact path="/pet-onboarding" element={<ProtectedRoute>
-            <PetOnboarding />
-          </ProtectedRoute>} />
         <Route exact path="/favourite-pets" element={<ProtectedRoute>
             <FavouritePets />
           </ProtectedRoute>} />
