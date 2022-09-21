@@ -34,7 +34,7 @@ export const AdminDashboard = () => {
   let dogAdopterIds = [];
   dogAdopters?.map((dogAdopter) => dogAdopterIds.push(dogAdopter?._id));
 
-  //filter ids of Cat Adopters
+  //filter ids of Cat Adopters 
 
   const catAdopters = usersData?.filter(
     (user) => user?.petPreference === "cats"
