@@ -171,7 +171,6 @@ export const createProfileAction = createAsyncThunk(
 export const updateMatchesAction = createAsyncThunk(
   "user/matches",
   async (payload, { rejectWithValue, getState, dispatch }) => {
-    console.log(payload?._id);
     // get user from store
     const userToken = getState()?.users?.userAuth
       ? getState()?.users?.userAuth?.token

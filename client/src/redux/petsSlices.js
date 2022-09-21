@@ -145,7 +145,6 @@ export const fetchMatchedPetsAction = createAsyncThunk(
       //make http call here
 
       const { data } = await axios.get(`${BaseURL}/pets/matches/`, config);
-      console.log(payload);
       return data;
     } catch (error) {
       if (!error?.response) {
@@ -206,7 +205,7 @@ export const deletepetAction = createAsyncThunk(
       //make http call here
 
       const { data } = await axios.delete(
-        `${BaseURL}/Pets/${payload?.id}`,
+        `${BaseURL}/Pets/${payload?._id}`,
         config
       );
       dispatch(resetPetDeleted());
