@@ -20,9 +20,9 @@ Admin Dashboard. The admin has visibility of the entire adoption process as well
 2. Navigate to the client folder and run npm install to install all the dependencies. Once the dependencies are installed, you can run npm start to start the client application. You will then be able to access it at localhost:3000
 
 3. Clone the API repo: https://github.com/luckson1/petMatchServer
-3. After cloning the API repo, in the root directory, run npm install to install all the dependencies. Once the dependencies are installed, you can run npm run dev to start the API server. You will then be able to access it at localhost:4000
-4. Create a MongoDB connection Url and add it to your environment variables.
-5. Create an account with Cloudinary and save the API keys to your environment variables.
+4. After cloning the API repo, in the root directory, run npm install to install all the dependencies. Once the dependencies are installed, you can run npm run dev to start the API server. You will then be able to access it at localhost:4000
+5. Create a MongoDB connection Url and add it to your environment variables.
+6. Create an account with Cloudinary and save the API keys to your environment variables.
 ## License 
 This project is licensed under the terms of the MIT license.
 ## Contacts
