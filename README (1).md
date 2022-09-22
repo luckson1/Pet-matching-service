@@ -7,6 +7,14 @@ This app can be used by a pet rescue NGO to manage the adoption process. It feat
 Swipeable cards. These cards contain images of the pets that are available for adoption. A potential adopter can swipe right to mark a pet as a favorite or swipe left to remove it from the dashboard.
 
 Admin Dashboard. The admin has visibility of the entire adoption process as well as all the pets available for adoption. He/She can create, edit and delete pet data on the app.
+
+### Main Dashboard
+![Dashboard](Dashboard.png)
+
+### Admin Dashbaord
+![Admin Dashboard](admin-dashboard.png)
+
+
 ## Set Up and Usage
 1. Clone this repo to your desktop
 2. Navigate to the client folder and run npm install to install all the dependencies. Once the dependencies are installed, you can run npm start to start the client application. You will then be able to access it at localhost:3000
