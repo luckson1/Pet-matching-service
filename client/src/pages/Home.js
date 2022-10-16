@@ -43,7 +43,7 @@ export const Home = () => {
         setIsSignUp={setIsSignUp}
       />
       <>
-        <div className="home">
+        <div className="home  bg-repeat">
           <h1 className="primary-title">Get A Pet</h1>
           <button
             className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full mb-4  py-4 px-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"

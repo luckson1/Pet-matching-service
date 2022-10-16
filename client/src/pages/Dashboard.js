@@ -90,7 +90,7 @@ export const Dashboard = () => {
               <div className="dashboard">
                 <div className="pet-header-small-screen">
                   <button
-                    className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full mb-4  py-4 px-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                    className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full mb-4 w-64 py-4  shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                     onClick={() => {
                       setShowModal(true);
                     }}
