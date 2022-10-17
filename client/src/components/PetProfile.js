@@ -1,10 +1,10 @@
 import React from 'react';
 export const PetProfile = ({ pet }) => {
-
+const petType=pet?.petType==="dogs" ? "Dog" : "Cat"
     return (
         <div className='pet '>
             <div className='pet-header'>
-                <h4>{pet?.name} {pet?.age} year old,  {pet?.gender} {pet?.breed} Breed</h4>
+                <h4>{pet?.name},  {pet?.petAge}    {pet?.gender} {petType},  {pet?.breed}  Breed</h4>
             </div>
             <div className='pet-details'>
                 <p><i className="bi bi-emoji-smile"></i> {pet?.children === "yes" ? "I am friendly to kinds below 8 years" : "I have not been socialised with kids in the past"}</p>
