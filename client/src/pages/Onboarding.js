@@ -8,16 +8,14 @@ import { useNavigate } from "react-router";
 import DisabledButton from "../components/DisabledButton";
 
 const errorSchema = Yup.object().shape({
-  gender: Yup.string().required("Gender Required"),
   petPreference: Yup.string().required("Pet preference Required"),
   children: Yup.string().required("Children Information Required"),
   petOwned: Yup.string().required("Pets Information Required"),
+  petAge: Yup.string().required("Pets Information Required"),
+  previousPets: Yup.string().required("Previous Pets Information Required"),
   garden: Yup.string().required("Garden Information Required"),
   active: Yup.string().required("This Information is Required"),
-  about: Yup.string()
-    .min(20, "About Me Information is Too Short!")
-    .max(1000, "About Me Information is Too Long!")
-    .required("About Me Information is Required"),
+
 });
 export const Onboarding = () => {
   // dispatch action of creating a profile
@@ -27,13 +25,13 @@ export const Onboarding = () => {
   // use formik hook to handle form state
   const formik = useFormik({
     initialValues: {
-      gender: "",
       petPreference: "",
       children: "",
       petOwned: "",
+      previousPets: "",
       garden: "",
       active: "",
-      about: "",
+      petAge: "",
       image: "",
     },
     validationSchema: errorSchema,
@@ -71,39 +69,8 @@ export const Onboarding = () => {
         <h2>CREATE PROFILE</h2>
         <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
           <section>
-            <label>Select Your Gender</label>
-            {/* errors */}
-            <div className="form-validation">
-              {formik.touched.gender && formik.errors.gender}
-            </div>
-
-            <div className="multiple-input-container">
-              <input
-                id="male"
-                value={undefined}
-                onChange={() => {
-                  formik.setFieldValue("gender", "male");
-                }}
-                onBlur={formik.handleBlur("gender")}
-                type="radio"
-                checked={formik.values.gender === "male"}
-              />
-
-              <label htmlFor="male">Male</label>
-
-              <input
-                id="female"
-                value={undefined}
-                onChange={() => {
-                  formik.setFieldValue("gender", "female");
-                }}
-                onBlur={formik.handleBlur("gender")}
-                type="radio"
-                checked={formik.values.gender === "female"}
-              />
-              <label htmlFor="female">Female</label>
-            </div>
-            <label htmlFor="petPreference">What is Your Pets Preference</label>
+           
+            <label htmlFor="petPreference">What pet are you hoping to adopt?</label>
             {/* errors */}
             <div className="form-validation">
               {formik.touched.petPreference && formik.errors.petPreference}
@@ -119,7 +86,7 @@ export const Onboarding = () => {
                 type="radio"
                 checked={formik.values.petPreference === "cats"}
               />
-              <label htmlFor="cats">Cats</label>
+              <label htmlFor="cats">A cat</label>
 
               <input
                 id="dogs"
@@ -131,7 +98,7 @@ export const Onboarding = () => {
                 type="radio"
                 checked={formik.values.petPreference === "dogs"}
               />
-              <label htmlFor="dogs">Dogs</label>
+              <label htmlFor="dogs">A Dog</label>
 
               <input
                 id="any"
@@ -146,26 +113,14 @@ export const Onboarding = () => {
               <label htmlFor="any">Any</label>
             </div>
             <label htmlFor="children">
-              Do You Have Children below 10 Years?
+              Do You Have Children?
             </label>
             {/* errors */}
             <div className="form-validation">
               {formik.touched.children && formik.errors.children}
             </div>
             <div className="multiple-input-container">
-              <input
-                id="yes-children"
-                value={undefined}
-                onChange={() => {
-                  formik.setFieldValue("children", "yes");
-                }}
-                onBlur={formik.handleBlur("children")}
-                type="radio"
-                checked={formik.values.children === "yes"}
-              />
-              <label htmlFor="yes-children">Yes</label>
-
-              <input
+            <input
                 id="No-children"
                 value={undefined}
                 onChange={() => {
@@ -176,6 +131,29 @@ export const Onboarding = () => {
                 checked={formik.values.children === "no"}
               />
               <label htmlFor="No-children">No</label>
+              <input
+                id="yes-children"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("children", "yes");
+                }}
+                onBlur={formik.handleBlur("children")}
+                type="radio"
+                checked={formik.values.children === "yes"}
+              />
+              <label htmlFor="yes-children">Yes, some below 8 years</label>
+
+              <input
+                id="Yes-older-children"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("children", "Yes above 8");
+                }}
+                onBlur={formik.handleBlur("children")}
+                type="radio"
+                checked={formik.values.children === "Yes above 8"}
+              />
+              <label htmlFor="Yes-older-children">Yes, all above 8 years</label>
             </div>
             <label htmlFor="pets-owned">Do You Currently Own Any Pets?</label>
             {/* errors */}
@@ -193,7 +171,7 @@ export const Onboarding = () => {
                 type="radio"
                 checked={formik.values.petOwned === "cat"}
               />
-              <label htmlFor="cats-owned">Cat/(s)</label>
+              <label htmlFor="cats-owned">Cat</label>
 
               <input
                 id="dogs-owned"
@@ -205,7 +183,18 @@ export const Onboarding = () => {
                 type="radio"
                 checked={formik.values.petOwned === "dog"}
               />
-              <label htmlFor="dogs-owned">Dog/(s)</label>
+              <label htmlFor="dogs-owned">Dog</label>
+              <input
+                id="chicken-owned"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("petOwned", "chicken");
+                }}
+                onBlur={formik.handleBlur("petOwned")}
+                type="radio"
+                checked={formik.values.petOwned === "chicken"}
+              />
+              <label htmlFor="chicken-owned">chicken</label>
 
               <input
                 id="none-owned"
@@ -229,7 +218,61 @@ export const Onboarding = () => {
                 type="radio"
                 checked={formik.values.petOwned === "both"}
               />
-              <label htmlFor="both-owned">Both</label>
+              <label htmlFor="both-owned">Cat&Dog</label>
+            </div>
+            <label htmlFor="pets-Prev-owned">Have you owned any pet in the past?</label>
+            {/* errors */}
+            <div className="form-validation">
+              {formik.touched.previousPets && formik.errors.previousPets}
+            </div>
+            <div className="multiple-input-container">
+              <input
+                id="cats-prev-pets"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("previousPets", "cat");
+                }}
+                onBlur={formik.handleBlur("previousPets")}
+                type="radio"
+                checked={formik.values.previousPets === "cat"}
+              />
+              <label htmlFor="cats-prev-pets">Cat/(s)</label>
+
+              <input
+                id="dogs-prev-pets"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("previousPets", "dog");
+                }}
+                onBlur={formik.handleBlur("previousPets")}
+                type="radio"
+                checked={formik.values.previousPets === "dog"}
+              />
+              <label htmlFor="dogs-prev-pets">Dog/(s)</label>
+
+              <input
+                id="none-prev-pets"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("previousPets", "none");
+                }}
+                onBlur={formik.handleBlur("previousPets")}
+                type="radio"
+                checked={formik.values.previousPets === "none"}
+              />
+              <label htmlFor="none-prev-pets">none</label>
+
+              <input
+                id="both-prev-pets"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("previousPets", "both");
+                }}
+                onBlur={formik.handleBlur("previousPets")}
+                type="radio"
+                checked={formik.values.previousPets === "both"}
+              />
+              <label htmlFor="both-prev-pets">Both</label>
             </div>
             <label htmlFor="garden">Do You Have a Garden?</label>
             {/* errors */}
@@ -247,7 +290,18 @@ export const Onboarding = () => {
                 type="radio"
                 checked={formik.values.garden === "yes"}
               />
-              <label htmlFor="yes-garden">Yes</label>
+              <label htmlFor="yes-garden">Yes, Private Garden</label>
+              <input
+                id="yes-garden-shared"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("garden", "shared");
+                }}
+                onBlur={formik.handleBlur("garden")}
+                type="radio"
+                checked={formik.values.garden === "shared"}
+              />
+              <label htmlFor="yes-garden-shared">Yes, Shared Garden</label>
 
               <input
                 id="No-garden"
@@ -293,27 +347,67 @@ export const Onboarding = () => {
               />
               <label htmlFor="No-active">No, Walks are Fine</label>
             </div>
-            <label>About Me</label>
+            <label>What pet age group do you prefer?</label>
             {/* errors */}
             <div className="form-validation">
-              {formik.touched.about && formik.errors.about}
+              {formik.touched.petAge && formik.errors.petAge}
             </div>
-            <textarea
-              id="about"
-              value={formik.values.about}
-              onChange={formik.handleChange("about")}
-              onBlur={formik.handleBlur("about")}
-              type="textarea"
-              placeholder="I like long walks......."
-            />
+            <div className="multiple-input-container">
+              <input
+                id="senior"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("petAge", "senior");
+                }}
+                onBlur={formik.handleBlur("petAge")}
+                type="radio"
+                checked={formik.values.petAge === "senior"}
+              />
+              <label htmlFor="senior">Senior</label>
+              <input
+                id="adult"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("petAge", "adult");
+                }}
+                onBlur={formik.handleBlur("petAge")}
+                type="radio"
+                checked={formik.values.petAge === "adult"}
+              />
+              <label htmlFor="adult">Adult</label>
 
-            <label htmlFor="about">Profile Pic (Optional)</label>
+              <input
+                id="young"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("petAge", "kitten/puppy");
+                }}
+                onBlur={formik.handleBlur("petAge")}
+                type="radio"
+                checked={formik.values.petAge === "kitten/puppy"}
+              />
+              <label htmlFor="young">Kitten/puppy</label>
+              <input
+                id="any-age"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("petAge", "any");
+                }}
+                onBlur={formik.handleBlur("petAge")}
+                type="radio"
+                checked={formik.values.petAge === "any"}
+              />
+              <label htmlFor="any-age">Any</label>
+            </div>
+
+            <label htmlFor="image">Profile Pic (Optional)</label>
             {/* errors */}
             <div className="form-validation">
               {formik.touched.image && formik.errors.image}
             </div>
 
             <input
+            id="image"
               name="image"
               value={undefined}
               onChange={(e) =>
@@ -321,8 +415,6 @@ export const Onboarding = () => {
               }
               onBlur={formik.handleBlur("image")}
               type="file"
-              placeholder="Profile Image"
-              id="image"
             />
 
             {createProfileLoading ? (
@@ -338,6 +430,7 @@ export const Onboarding = () => {
           ) : null}
           <section></section>
         </form>
+        
       </div>
     </>
   );
