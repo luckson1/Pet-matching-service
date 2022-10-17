@@ -15,21 +15,37 @@ import {
 export const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
   const [lastDirection, setLastDirection] = useState();
+  const [currentPet, setCurrentPet] = useState();
   const dispatch = useDispatch();
-  const swiped = (direction, pet) => {
-    console.log(direction);
+
+  const swiped = function (direction, pet) {
     setLastDirection(direction);
+    console.log(direction);
     // call action to update matches when one swipes right
     if (direction === "right") {
       return dispatch(updateMatchesAction(pet));
     }
   };
-
-  const outOfFrame = (name) => {
+  let showInfo = "";
+  const outOfFrame = function (name) {
+    setCurrentPet(name);
     console.log(name + " left the screen!");
   };
-  // fetch prefered pets
 
+  const showInfoFunc = () => {
+    showInfo =
+      lastDirection === "right"
+        ? currentPet + " was added to favourites"
+        : lastDirection === "left"
+        ? currentPet + " left the screen"
+        : lastDirection === "up"
+        ? currentPet + " left the screen"
+        : lastDirection === "down"
+        ? currentPet + " left the screen"
+        : "";
+    return showInfo;
+  }; // fetch prefered pets
+  const swipeAction= showInfoFunc();
   useEffect(() => {
     dispatch(fetchPetsAction());
   }, [dispatch]);
@@ -58,8 +74,8 @@ export const Dashboard = () => {
   return (
     <>
       <Nav authToken />
-      <div className="md:mx-20 mt-20 ">
-        <div className="info">
+      <div className="md:mx-20 mt-16 ">
+        <div className="w-11/12 fixed justify-center">
           {isOnboarded ? (
             <h4>
               Swipe Right to add a Pet to Favourites, or Left to Remove it from
@@ -67,9 +83,15 @@ export const Dashboard = () => {
             </h4>
           ) : (
             <p>
-              Please complete the <a href="/onboarding">registration process</a>
+              Please complete the{" "}
+              <a href="/onboarding" className="text-blue-500">
+                registration process
+              </a>
             </p>
           )}
+          <div className="mt-2 text-blue-600">
+            {currentPet && swipeAction}
+          </div>
         </div>
         {/* Errors */}
         {petAppErr || petServerErr ? (
@@ -77,6 +99,7 @@ export const Dashboard = () => {
             {petServerErr} {petAppErr}
           </div>
         ) : null}
+   
         {petLoading ? (
           <LoadingComponent />
         ) : (
@@ -87,10 +110,10 @@ export const Dashboard = () => {
               onSwipe={(dir) => swiped(dir, pet)}
               onCardLeftScreen={() => outOfFrame(pet.name)}
             >
-              <div className="dashboard">
+              <div className="dashboard mt-20">
                 <div className="pet-header-small-screen">
                   <button
-                    className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full mb-4 w-64 py-4  shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                    className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full mb-4 w-48 py-2  shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                     onClick={() => {
                       setShowModal(true);
                     }}
@@ -98,7 +121,7 @@ export const Dashboard = () => {
                       setShowModal(true);
                     }}
                   >
-                    View {pet?.name}'s Profile
+                    {pet?.name}'s Profile
                   </button>
                 </div>
                 {showModal && (
@@ -120,20 +143,17 @@ export const Dashboard = () => {
                     >
                       <h3>{pet.name}</h3>
                     </div>
-                    <div className="swipe-info mt-10" key={pet._id}>
-                      {lastDirection === "right" ? (
-                        <p className="text-lg">pet added to favourites</p>
-                      ) : lastDirection === "left" ? (
-                        <p>Pet removed from the dashboard</p>
-                      ) : null}
-                    </div>
                   </div>
+                  
                 </div>
+                
               </div>
+              
             </TinderCard>
           ))
         )}
-      </div>
+        </div>
+    
     </>
   );
 };
