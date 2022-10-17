@@ -9,11 +9,7 @@ import { createPetAction, editPetsAction } from "../redux/petsSlices";
 import Cat from "../components/images/Cat.jpg";
 
 const onboardingErrorSchema = Yup.object().shape({
-  age: Yup.number()
-    .min(1, "Invalide Age!")
-    .max(25, "Too old!")
-    .positive()
-    .required("Age Required"),
+  petAge: Yup.string().required("Age Required"),
 
   gender: Yup.string().required("Gender Required"),
   breed: Yup.string().required("Breed Required"),
@@ -64,7 +60,7 @@ closeFormHandler,
 
   const formik = useFormik({
     initialValues: {
-      age: isEdit ? pet?.age : "",
+      petAge: isEdit ? pet?.petAge : "",
       gender: isEdit ? pet?.gender : "",
       name: isEdit ? pet?.name : "",
       breed: isEdit ? pet?.breed : "",
@@ -86,6 +82,7 @@ closeFormHandler,
           createPetHandler(values);
         },
   });
+  console.log(formik.values)
   // force navigation to dashboard
   const navigate = useNavigate();
 
@@ -174,20 +171,49 @@ closeFormHandler,
                   placeholder="name"
                 />
               </div>
-              <label>Approximate Age?</label>
+              <label>What age group is the pet?</label>
               {/* errors */}
               <div className="form-validation">
-                {formik.touched.age && formik.errors.age}
+                {formik.touched.petAge && formik.errors.petAge}
               </div>
-              <div className="w-48">
-                <input
-                  id="age"
-                  value={formik.values.age}
-                  onChange={formik.handleChange("age")}
-                  onBlur={formik.handleBlur("age")}
-                  type="number"
-                />
-              </div>
+             
+            <div className="multiple-input-container">
+              <input
+                id="senior"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("petAge", "senior");
+                }}
+                onBlur={formik.handleBlur("petAge")}
+                type="radio"
+                checked={formik.values.petAge === "senior"}
+              />
+              <label htmlFor="senior">Senior</label>
+              <input
+                id="adult"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("petAge", "adult");
+                }}
+                onBlur={formik.handleBlur("petAge")}
+                type="radio"
+                checked={formik.values.petAge === "adult"}
+              />
+              <label htmlFor="adult">Adult</label>
+
+              <input
+                id="young"
+                value={undefined}
+                onChange={() => {
+                  formik.setFieldValue("petAge", "kitten/puppy");
+                }}
+                onBlur={formik.handleBlur("petAge")}
+                type="radio"
+                checked={formik.values.petAge === "kitten/puppy"}
+              />
+              <label htmlFor="any">Kitten/puppy</label>
+           
+            </div>
               <label>Pets Gender</label>
               {/* errors */}
               <div className="form-validation">
