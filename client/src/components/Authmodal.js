@@ -76,14 +76,8 @@ export const Authmodal = ({ setShowModal, isSignUp, setIsSignUp }) => {
       >
         <i className="bi bi-file-excel"></i>
       </div>
-      <h2>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h2>
-      {isSignUp && (
-        <p>
-          {" "}
-          By clicking Sign Up you are in agreement with our terms. Learn more
-          from our Privacy Policy Page
-        </p>
-      )}
+      <h1>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h1>
+   
       {/* Errors */}
       {userAppErr || userServerErr ? (
         <div className="form-validation" role="alert">
