@@ -5,9 +5,12 @@ export const PetProfileModal = ({ setShowModal, pet }) => {
     <div className="bg-half-transparent  fixed nav-item top-0 right-0 z-50 fixed-modal">
       <div className="pet-modal">
         <div
-          onClick={() => {
-            setShowModal(false);
-          }}
+         onClick={() => {
+          setShowModal(true);
+        }}
+        onTouchStart={() => {
+          setShowModal(true);
+        }}
           className="close-icon animate-spin "
         >
           <i className="bi bi-x-circle-fill" style={{ color: "red" }}></i>
