@@ -156,7 +156,7 @@ const petsCards=pets? [lastCard, ...pets]: null;
                       style={{ backgroundImage: "url(" + pet.image + ")" }}
                       className="card"
                     >
-                     {pet?.name=== "Last Card"? <h2>Congratulations! You're all caught up! <Link to="/favourite-pets" className="text-blue-500 underline">View your favourite pets</Link></h2>: <h3>{pet.name}</h3>}
+                     {pet?.name=== "Last Card"? <h2>Congratulations! You're all caught up! <Link to="/favourite-pets" className="text-blue-500 underline" onTouchStart={()=> navigate("/favourite-pets")}>View your favourite pets</Link></h2>: <h3>{pet.name}</h3>}
                     </div>
                   </div>
                   
