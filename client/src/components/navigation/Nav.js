@@ -16,7 +16,7 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
 
   return (
     <nav
-      className="fixed w-12/12 z-30 top-0  dark:text-slate-10 px-10 bg-white"
+      className="fixed w-12/12 z-30 top-0  px-10 bg-white"
     >
       <div className="flex justify-center items-center h-12 w-12 mt-3 ml-2">
         <img
@@ -42,13 +42,13 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
         <div
           className={`w-full flex-grow md:flex md:items-center md:w-auto ${
             isOpenMenu ? "" : "hidden"
-          } mt-2 md:mt-0 bg-white  dark:bg-[#484B52] dark:text-slate-100 text-black p-4 md:p-0 z-10" `}
+          } mt-2 md:mt-0 bg-white  text-black p-4 md:p-0 z-10" `}
         >
           <ul className="list-reset md:flex  flex-1 items-center ">
             <li className=" mr-96 md:mr-3  ">
               <Link
                 onClick={() => setIsOpenMenu(!isOpenMenu)}
-                className="inline-block  py-2 px-4 text-black dark:text-slate-100 font-bold no-underline "
+                className="inline-block  py-2 px-4 text-black font-bold no-underline "
                 to="/"
               >
                 Home
@@ -58,7 +58,7 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
             {userLogin &&  <> <li className="mr-96 md:mr-3 ">
               <Link
                 onClick={() => setIsOpenMenu(!isOpenMenu)}
-                className="inline-block text-black dark:text-slate-100 no-underline hover:text-gray-900 hover:text-underline py-2 px-4"
+                className="inline-block text-black no-underline hover:text-gray-900 hover:text-underline py-2 px-4"
                 to="/dashboard"
               >
                Dashboard
@@ -67,7 +67,7 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
             <li className="mr-96 md:mr-3 ">
               <Link
                 onClick={() => setIsOpenMenu(!isOpenMenu)}
-                className="inline-block text-black dark:text-slate-100 no-underline hover:text-gray-900 hover:text-underline py-2 px-4"
+                className="inline-block text-black no-underline hover:text-gray-900 hover:text-underline py-2 px-4"
                 to="/favourite-pets">
                 Favourites
               </Link>
@@ -80,7 +80,7 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
                   //   setActiveMenu(true);
                   //   setShowNavBar(true);
                   // }}
-                  className="inline-block text-black dark:text-slate-100 no-underline hover:text-gray-900 hover:text-underline py-2 px-4"
+                  className="inline-block text-black no-underline hover:text-gray-900 hover:text-underline py-2 px-4"
                   to="/admin-dashboard"
                 >
                   Admin
