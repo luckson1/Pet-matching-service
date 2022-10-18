@@ -51,7 +51,7 @@ export const Home = () => {
               authToken ? dispatch(logout()) : setShowModal(true);
             }}
           >
-            {authToken ? "Sign out" : "create Account"}
+            {authToken ? "Sign Out" : "Create Account"}
           </button>
           {showModal && (
             <Authmodal
