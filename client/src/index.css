@@ -63,11 +63,8 @@ nav {
 }
 .close-icon {
   float: right;
-  font-size: x-large;
+  font-size: 30px;
   margin-bottom: 20px;
-  -webkit-animation: bounce 0.73s infinite alternate;
-  -moz-animation: bounce 0.73s infinite alternate;
-  animation: bounce 0.73s infinite alternate;
   cursor: pointer;
 }
 

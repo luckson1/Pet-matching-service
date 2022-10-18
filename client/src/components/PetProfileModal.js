@@ -8,7 +8,7 @@ export const PetProfileModal = ({ setShowModal, pet }) => {
           onClick={() => {
             setShowModal(false);
           }}
-          className="close-icon "
+          className="close-icon animate-spin "
         >
           <i className="bi bi-x-circle-fill" style={{ color: "red" }}></i>
         </div>
