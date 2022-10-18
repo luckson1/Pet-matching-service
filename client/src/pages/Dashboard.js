@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import TinderCard from "react-tinder-card";
 import LoadingComponent from "../components/LoadingSpinner";
 
@@ -15,38 +17,13 @@ import {
 export const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
   const [lastDirection, setLastDirection] = useState();
-  const [currentPet, setCurrentPet] = useState();
+  const [removedPet, setRemovedPet] = useState();
   const [selectedPet, setSelectedPet] = useState();
+
   const dispatch = useDispatch();
+  const navigate=useNavigate()
 
-  const swiped = function (direction, pet) {
-    setLastDirection(direction);
 
-    // call action to update matches when one swipes right
-    if (direction === "right") {
-      return dispatch(updateMatchesAction(pet));
-    }
-  };
-  let showInfo = "";
-  const outOfFrame = function (name) {
-    setCurrentPet(name);
-
-  };
-
-  const showInfoFunc = () => {
-    showInfo =
-      lastDirection === "right"
-        ? currentPet + " was added to favourites"
-        : lastDirection === "left"
-        ? currentPet + " left the screen"
-        : lastDirection === "up"
-        ? currentPet + " left the screen"
-        : lastDirection === "down"
-        ? currentPet + " left the screen"
-        : "";
-    return showInfo;
-  }; // fetch prefered pets
-  const swipeAction= showInfoFunc();
   useEffect(() => {
     dispatch(fetchPetsAction());
   }, [dispatch]);
@@ -65,12 +42,39 @@ export const Dashboard = () => {
 
   const { petsFetched, petLoading, petAppErr, petServerErr } = petsState;
   const pets = petsFetched;
-
   const { userProfile } = user;
-
+const lastCard= {_id:"123", name: "Last Card"}
+const petsCards=pets? [lastCard, ...pets]: null;
   const isOnboarded = userProfile?.user?.petPreference;
 
-  //show Favourite Pets button
+  let showInfo = "";
+  const outOfFrame = function (name) {
+    setRemovedPet(name);
+  };
+  const swiped = function (direction, pet) {
+    setLastDirection(direction);
+
+
+    // call action to update matches when one swipes right
+    if (direction === "right") {
+      return dispatch(updateMatchesAction(pet));
+    }
+  };
+
+  const showInfoFunc = () => {
+    showInfo =
+      lastDirection === "right"
+        ? removedPet + " was added to favourites"
+        : lastDirection === "left"
+        ? removedPet + " left the screen"
+        : lastDirection === "up"
+        ? removedPet + " left the screen"
+        : lastDirection === "down"
+        ? removedPet + " left the screen"
+        : "";
+    return showInfo;
+  }; // fetch prefered pets
+  const swipeAction= showInfoFunc();
 
   return (
     <>
@@ -91,7 +95,7 @@ export const Dashboard = () => {
             </p>
           )}
           <div className="mt-2 text-blue-600">
-            {currentPet && swipeAction}
+            {removedPet && swipeAction}
           </div>
         </div>
         {/* Errors */}
@@ -104,7 +108,7 @@ export const Dashboard = () => {
         {petLoading ? (
           <LoadingComponent />
         ) : (
-          pets?.map((pet) => (
+          petsCards?.map((pet) => (
             <TinderCard
               className="swipe"
               key={pet._id}
@@ -113,7 +117,7 @@ export const Dashboard = () => {
             >
               <div className="dashboard mt-20">
                 <div className="pet-header-small-screen">
-                  <button
+                 {pet?.name !=="Last Card" && <button
                     className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full  w-48 py-2  shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                     onClick={() => {
                       setShowModal(true);
@@ -125,7 +129,18 @@ export const Dashboard = () => {
                     }}
                   >
                     {pet?.name}'s Profile
-                  </button>
+                  </button>}
+                  {pet?.name ==="Last Card" && <button
+                    className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full  w-48 py-2  shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                    onClick={() => {
+                  navigate("/favourite-pets")
+                    }}
+                    onTouchStart={() => {
+                      navigate("/favourite-pets")
+                    }}
+                  >
+                   Favourites
+                  </button>}
                 </div>
                 {showModal && (
                   <PetProfileModal
@@ -141,7 +156,7 @@ export const Dashboard = () => {
                       style={{ backgroundImage: "url(" + pet.image + ")" }}
                       className="card"
                     >
-                      <h3>{pet.name}</h3>
+                     {pet?.name=== "Last Card"? <h2>Congratulations! You're all caught up! <Link to="/favourite-pets" className="text-blue-500">View your favourite pets</Link></h2>: <h3>{pet.name}</h3>}
                     </div>
                   </div>
                   
