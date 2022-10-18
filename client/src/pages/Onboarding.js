@@ -67,7 +67,7 @@ export const Onboarding = () => {
       <Nav />
       <div className="onboarding h-11/12 w-11/12 md:w-8/12 bg-indigo-50 shadow-2xl mt-24 rounded-xl mx-auto text-xs md:text-sm">
         <h2>CREATE PROFILE</h2>
-        <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+        <form onSubmit={formik.handleSubmit} >
           <section>
            
             <label htmlFor="petPreference">What pet are you hoping to adopt?</label>
@@ -399,24 +399,6 @@ export const Onboarding = () => {
               />
               <label htmlFor="any-age">Any</label>
             </div>
-
-            <label htmlFor="image">Profile Pic (Optional)</label>
-            {/* errors */}
-            <div className="form-validation">
-              {formik.touched.image && formik.errors.image}
-            </div>
-
-            <input
-            id="image"
-              name="image"
-              value={undefined}
-              onChange={(e) =>
-                formik.setFieldValue("image", e.currentTarget.files[0])
-              }
-              onBlur={formik.handleBlur("image")}
-              type="file"
-            />
-
             {createProfileLoading ? (
               <DisabledButton />
             ) : (
