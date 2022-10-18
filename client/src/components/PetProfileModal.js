@@ -6,10 +6,10 @@ export const PetProfileModal = ({ setShowModal, pet }) => {
       <div className="pet-modal">
         <div
          onClick={() => {
-          setShowModal(true);
+          setShowModal(false);
         }}
         onTouchStart={() => {
-          setShowModal(true);
+          setShowModal(false);
         }}
           className="close-icon animate-spin "
         >
