@@ -16,7 +16,7 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
 
   return (
     <nav
-      className="fixed w-11/12 z-30 top-0  dark:text-slate-10 mx-10 "
+      className="fixed w-12/12 z-30 top-0  dark:text-slate-10 px-10 bg-white"
     >
       <div className="flex justify-center items-center h-12 w-12 mt-3 ml-2">
         <img
