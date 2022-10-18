@@ -37,15 +37,22 @@ export const FavouritePets = () => {
         ) : petServerErr || petAppErr ? (
           <ErrorDisplayMessage>Error</ErrorDisplayMessage>
         ) : petsMatched?.length === 0 ? (
-          <h3>No Pets to display</h3>
+          <>
+            <h3>No Pets to display</h3>
+            <h4 className="text-blue-500 mt-7 underline">
+              <Link to="/dashboard">Back to Dashboard</Link>
+            </h4>
+          </>
         ) : (
           <>
             <div className="heading">
               <h4>
-                These are Your Favourite. Click on the
-                image for more information. 
+                These are Your Favourite. Click on the image for more
+                information.
               </h4>
-              <h4 className="text-blue-500 mt-7 underline"><Link to="/dashboard">Back to Dashboard</Link></h4>
+              <h4 className="text-blue-500 mt-7 underline">
+                <Link to="/dashboard">Back to Dashboard</Link>
+              </h4>
             </div>
             <div className="bg-white m-10 p-5 rounded h-full ">
               <FavouritePetsMatched petsMatched={petsMatched} />
