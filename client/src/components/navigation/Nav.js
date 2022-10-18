@@ -28,7 +28,7 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
           }}
         />
       </div>
-      <div className="w-full mx-auto flex flex-wrap items-center justify-between mt-0 py-2 bg-white  dark:bg-[#484B52]">
+      <div className="w-full mx-auto flex flex-wrap items-center justify-between mt-0 py-2 bg-white">
         <div className="pl-4 flex items-center"></div>
         <div className="block lg:hidden pr-4">
           <button
