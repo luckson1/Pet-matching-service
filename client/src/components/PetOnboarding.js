@@ -82,7 +82,6 @@ closeFormHandler,
           createPetHandler(values);
         },
   });
-  console.log(formik.values)
   // force navigation to dashboard
   const navigate = useNavigate();
 
@@ -211,7 +210,7 @@ closeFormHandler,
                 type="radio"
                 checked={formik.values.petAge === "kitten/puppy"}
               />
-              <label htmlFor="any">Kitten/puppy</label>
+              <label htmlFor="young">Kitten/puppy</label>
            
             </div>
               <label>Pets Gender</label>
