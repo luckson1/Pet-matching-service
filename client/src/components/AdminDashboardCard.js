@@ -10,7 +10,7 @@ export default function AdminDashboardCard({
 }) {
   const navigate = useNavigate();
   return (
-    <div className="h-64 w-64 bg-indigo-100 rounded-lg shadow-lg flex flex-col justify-between items-center py-7 mb-7">
+    <div className="h-64 w-64 bg-indigo-100 rounded-lg shadow-lg flex flex-col justify-between items-center py-7 mb-7 px-4">
       <img src={src} alt="placeHolder" className="h-12 w-12 rounded-full" />
       <p className="w-56 text-left">{title}</p>
       <button
