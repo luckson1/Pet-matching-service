@@ -16,11 +16,12 @@ export const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
   const [lastDirection, setLastDirection] = useState();
   const [currentPet, setCurrentPet] = useState();
+  const [selectedPet, setSelectedPet] = useState();
   const dispatch = useDispatch();
 
   const swiped = function (direction, pet) {
     setLastDirection(direction);
-    console.log(direction);
+
     // call action to update matches when one swipes right
     if (direction === "right") {
       return dispatch(updateMatchesAction(pet));
@@ -29,7 +30,7 @@ export const Dashboard = () => {
   let showInfo = "";
   const outOfFrame = function (name) {
     setCurrentPet(name);
-    console.log(name + " left the screen!");
+
   };
 
   const showInfoFunc = () => {
@@ -116,9 +117,11 @@ export const Dashboard = () => {
                     className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full  w-48 py-2  shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                     onClick={() => {
                       setShowModal(true);
+                      setSelectedPet(pet)
                     }}
                     onTouchStart={() => {
                       setShowModal(true);
+                      setSelectedPet(pet)
                     }}
                   >
                     {pet?.name}'s Profile
@@ -127,14 +130,11 @@ export const Dashboard = () => {
                 {showModal && (
                   <PetProfileModal
                     setShowModal={setShowModal}
-                    pet={pet}
+                    pet={selectedPet}
                     key={pet._id}
                   />
                 )}
-                {/* <div className='pet-container'>
-
-              <PetProfile pet={pet} key={pet._id} />
-            </div> */}
+     
                 <div className="swiper-container">
                   <div className="card-container" key={pet._id}>
                     <div
