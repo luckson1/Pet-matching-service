@@ -9,8 +9,8 @@ export default function FavouritePetsMatched({petsMatched}) {
             <div id="main">
                 <img alt="" src={pet?.image}></img>
             </div>
-            <div id="textbois">
-                <h3>{pet?.name}</h3>
+            <div id="textbois" className='text-xs px-2 py-8 text-slate-00'>
+                <h3 className='text-lg'>{pet?.name}</h3>
                 <p>Friendly to a child: {pet?.children}</p>
                 <p>Likes cats/dogs: {pet?.petTorrelance}</p>
                 <p>Gender: {pet?.gender}</p>
