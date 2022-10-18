@@ -75,12 +75,12 @@ export const Dashboard = () => {
     <>
       <Nav authToken />
       <div className="md:mx-20 mt-16 ">
-        <div className="w-11/12 fixed justify-center">
+        <div className="w-11/12 fixed justify-center text-xs md:text-lg">
           {isOnboarded ? (
-            <h4>
+            <p >
               Swipe Right to add a Pet to Favourites, or Left to Remove it from
               Dashboard
-            </h4>
+            </p>
           ) : (
             <p>
               Please complete the{" "}
@@ -113,7 +113,7 @@ export const Dashboard = () => {
               <div className="dashboard mt-20">
                 <div className="pet-header-small-screen">
                   <button
-                    className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full mb-4 w-48 py-2  shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                    className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full  w-48 py-2  shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                     onClick={() => {
                       setShowModal(true);
                     }}
