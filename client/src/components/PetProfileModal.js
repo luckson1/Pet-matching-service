@@ -3,7 +3,7 @@ import { PetProfile } from "./PetProfile";
 export const PetProfileModal = ({ setShowModal, pet }) => {
   return (
     <div className="bg-half-transparent  fixed nav-item top-0 right-0 z-50 fixed-modal">
-      <div className="pet-modal">
+      <div className="pet-modal mt-10">
         <div
          onClick={() => {
           setShowModal(false);

@@ -98,6 +98,12 @@ const petsCards=pets? [lastCard, ...pets]: null;
             {removedPet && swipeAction}
           </div>
         </div>
+        {showModal && (
+                  <PetProfileModal
+                    setShowModal={setShowModal}
+                    pet={selectedPet}
+                  />
+                )}
         {/* Errors */}
         {petAppErr || petServerErr ? (
           <div className="form-validation" role="alert">
@@ -142,13 +148,7 @@ const petsCards=pets? [lastCard, ...pets]: null;
                    Favourites
                   </button>}
                 </div>
-                {showModal && (
-                  <PetProfileModal
-                    setShowModal={setShowModal}
-                    pet={selectedPet}
-                    key={pet._id}
-                  />
-                )}
+             
      
                 <div className="swiper-container">
                   <div className="card-container" key={pet._id}>
