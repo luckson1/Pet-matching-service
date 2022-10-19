@@ -121,7 +121,7 @@ const petsCards=pets? [lastCard, ...pets]: null;
               onSwipe={(dir) => swiped(dir, pet)}
               onCardLeftScreen={() => outOfFrame(pet.name)}
             >
-              <div className="dashboard mt-20">
+              <div className="dashboard mt-24">
                 <div className="pet-header-small-screen">
                  {pet?.name !=="Last Card" && <button
                     className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full  w-48 py-2  shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
