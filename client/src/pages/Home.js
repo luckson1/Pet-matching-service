@@ -94,7 +94,8 @@ export const Home = () => {
           )}
         </div>
       </div>
-      <div className="relative  bg-gradient-to-r from-indigo-400 dark:bg-[#484B52] dark:text-slate-100">
+      <div className="relative  bg-gradient-to-r from-indigo-400
+       ">
         <div className="md:hidden h-12"></div>
         <svg
           viewBox="0 0 1428 174"
@@ -192,7 +193,7 @@ export const Home = () => {
           </div>
         </div>
         <svg
-          className="wave-top dark:bg-[#484B52] dark:text-slate-100 bg-gradient-to-r from-indigo-400 via-purple-200 to-indigo-200"
+          className="wave-top   bg-gradient-to-r from-indigo-400 via-purple-200 to-indigo-200"
           viewBox="0 0 1439 147"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -222,19 +223,19 @@ export const Home = () => {
             </g>
           </g>
         </svg>
-        <footer className="w-full mx-auto text-center py-6 mb-12 bg-gradient-to-r from-indigo-300 via-purple-100 to-indigo-100 mt-0 dark:bg-[#484B52] dark:text-slate-100">
+        <footer className="w-full mx-auto text-center py-6 mb-12 bg-gradient-to-r from-indigo-300 via-purple-100 to-indigo-100 mt-0  ">
           <div className="container mx-auto px-8">
             <div className="w-full flex flex-col md:flex-row py-6">
               <div className="flex-1 mb-6 text-black"></div>
               <div className="flex-1">
-                <p className="uppercase text-gray-900  dark:text-slate-100 md:mb-6 ">
+                <p className="uppercase text-gray-900   md:mb-6 ">
                   Links
                 </p>
                 <ul className="list-reset mb-6">
                   <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                     <a
                       href="/"
-                      className="no-underline hover:underline text-gray-900  dark:text-slate-100 hover:text-pink-500"
+                      className="no-underline hover:underline text-gray-900   hover:text-pink-500"
                     >
                       FAQ
                     </a>
@@ -242,7 +243,7 @@ export const Home = () => {
                   <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                     <a
                       href="/"
-                      className="no-underline hover:underline text-gray-900  dark:text-slate-100 hover:text-pink-500"
+                      className="no-underline hover:underline text-gray-900   hover:text-pink-500"
                     >
                       Help
                     </a>
@@ -250,7 +251,7 @@ export const Home = () => {
                   <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                     <a
                       href="/"
-                      className="no-underline hover:underline text-gray-900  dark:text-slate-100 hover:text-pink-500"
+                      className="no-underline hover:underline text-gray-900   hover:text-pink-500"
                     >
                       Support
                     </a>
@@ -258,14 +259,14 @@ export const Home = () => {
                 </ul>
               </div>
               <div className="flex-1">
-                <p className="uppercase text-gray-900  dark:text-slate-100 md:mb-6">
+                <p className="uppercase text-gray-900   md:mb-6">
                   Legal
                 </p>
                 <ul className="list-reset mb-6">
                   <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                     <a
                       href="/"
-                      className="no-underline hover:underline text-gray-900  dark:text-slate-100 hover:text-pink-500"
+                      className="no-underline hover:underline text-gray-900   hover:text-pink-500"
                     >
                       Terms
                     </a>
@@ -273,7 +274,7 @@ export const Home = () => {
                   <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                     <a
                       href="/"
-                      className="no-underline hover:underline text-gray-900  dark:text-slate-100 hover:text-pink-500"
+                      className="no-underline hover:underline text-gray-900   hover:text-pink-500"
                     >
                       Privacy
                     </a>
@@ -281,14 +282,14 @@ export const Home = () => {
                 </ul>
               </div>
               <div className="flex-1">
-                <p className="uppercase text-gray-900  dark:text-slate-100 md:mb-6">
+                <p className="uppercase text-gray-900   md:mb-6">
                   Social
                 </p>
                 <ul className="list-reset mb-6">
                   <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                     <a
                       href="/"
-                      className="no-underline hover:underline text-gray-900  dark:text-slate-100 hover:text-pink-500"
+                      className="no-underline hover:underline text-gray-900   hover:text-pink-500"
                     >
                       Facebook
                     </a>
@@ -296,7 +297,7 @@ export const Home = () => {
                   <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                     <a
                       href="/"
-                      className="no-underline hover:underline text-gray-900  dark:text-slate-100 hover:text-pink-500"
+                      className="no-underline hover:underline text-gray-900   hover:text-pink-500"
                     >
                       Linkedin
                     </a>
@@ -304,7 +305,7 @@ export const Home = () => {
                   <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                     <a
                       href="/"
-                      className="no-underline hover:underline text-gray-900  dark:text-slate-100 hover:text-pink-500"
+                      className="no-underline hover:underline text-gray-900   hover:text-pink-500"
                     >
                       Twitter
                     </a>
@@ -312,14 +313,14 @@ export const Home = () => {
                 </ul>
               </div>
               <div className="flex-1">
-                <p className="uppercase text-gray-900  dark:text-slate-100 md:mb-6">
+                <p className="uppercase text-gray-900   md:mb-6">
                   Company
                 </p>
                 <ul className="list-reset mb-6">
                   <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                     <a
                       href="/"
-                      className="no-underline hover:underline text-gray-900  dark:text-slate-100 hover:text-pink-500"
+                      className="no-underline hover:underline text-gray-900   hover:text-pink-500"
                     >
                       Official Blog
                     </a>
@@ -327,7 +328,7 @@ export const Home = () => {
                   <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                     <a
                       href="/"
-                      className="no-underline hover:underline text-gray-900  dark:text-slate-100 hover:text-pink-500"
+                      className="no-underline hover:underline text-gray-900   hover:text-pink-500"
                     >
                       About Us
                     </a>
@@ -335,7 +336,7 @@ export const Home = () => {
                   <li className="mt-2 inline-block mr-2 md:block md:mr-0">
                     <a
                       href="/"
-                      className="no-underline hover:underline text-gray-900  dark:text-slate-100 hover:text-pink-500"
+                      className="no-underline hover:underline text-gray-900   hover:text-pink-500"
                     >
                       Contact
                     </a>
