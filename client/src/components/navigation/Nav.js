@@ -42,7 +42,7 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
         <div
           className={`w-full flex-grow md:flex md:items-center md:w-auto ${
             isOpenMenu ? "" : "hidden"
-          } mt-2 md:mt-0 bg-white  text-black p-4 md:p-0 z-10" `}
+          } mt-2 md:mt-0 bg-white  text-black p-0 z-10" `}
         >
           <ul className="list-reset md:flex  flex-1 items-center ">
             <li className=" mr-96 md:mr-3  ">

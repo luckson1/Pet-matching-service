@@ -58,11 +58,11 @@ export const Home = () => {
 
       <div className="w-screen h-3/6 sm:h-4/6">
         <div className=" overlay mt-16 bg-no-repeat overflow-visible">
-          <p className=" text-xl md:text-2xl text-violet-500 mx-3 ">
+          <p className=" text-xl md:text-2xl text-violet-500 mx-3 mt-24 ">
             Find your new best friend, or rehome your pet
           </p>
 
-          <div className="mt-6 md:mt-56 mx-10 flex flex-col items-center md:flex-row md:gap-5  md:px-24">
+          <div className="mt-6 md:mt-56 mx-10 flex flex-col items-center md:flex-row md:gap-5  md:px-20">
             <button
               className="w-72 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-gray-900 font-bold rounded-full mb-2 py-3  px-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
               onClick={() => {
@@ -77,7 +77,7 @@ export const Home = () => {
                 <button
                   className=" w-72  bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-gray-900 font-bold rounded-full mb-2 py-3  px-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                   onClick={() => {
-                    navigate("/doner-onboarding ");
+                    navigate("/doner-onboarding");
                   }}
                 >
                   Put Your Pet on Adoption
