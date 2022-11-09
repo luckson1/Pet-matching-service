@@ -1,98 +1,176 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import TinderCard from 'react-tinder-card'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import TinderCard from "react-tinder-card";
+import LoadingComponent from "../components/LoadingSpinner";
 
-import { Nav } from '../components/Nav';
+import { Nav } from "../components/navigation/Nav";
+import { PetProfileModal } from "../components/PetProfileModal";
 
-import { fetchPetsAction } from '../redux/petsSlices';
-
-
-
-
+import { fetchPetsAction } from "../redux/petsSlices";
+import {
+  fetchUserProfileAction,
+  updateMatchesAction,
+} from "../redux/usersSlices";
 
 export const Dashboard = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [lastDirection, setLastDirection] = useState();
+  const [removedPet, setRemovedPet] = useState();
+  const [selectedPet, setSelectedPet] = useState();
 
-  const [lastDirection, setLastDirection] = useState()
+  const dispatch = useDispatch();
+  const navigate=useNavigate()
 
-  const swiped = (direction, nameToDelete) => {
-    console.log('removing: ' + nameToDelete)
-    setLastDirection(direction)
-  }
 
-  const outOfFrame = (name) => {
-    console.log(name + ' left the screen!')
-  }
+  useEffect(() => {
+    dispatch(fetchPetsAction());
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchUserProfileAction());
+  }, [dispatch]);
 
   // get state from the store
   const user = useSelector((state) => {
-    return state?.users
-  })
+    return state?.users;
+  });
 
-  const pets = useSelector((state) => {
-    return state?.pets?.petsFetched
-  })
+  const petsState = useSelector((state) => {
+    return state?.pets;
+  });
 
-  const { userAuth } = user;
-  const authToken = userAuth;
+  const { petsFetched, petLoading, petAppErr, petServerErr } = petsState;
+  const pets = petsFetched;
+  const { userProfile } = user;
+const lastCard= {_id:"123", name: "Last Card"}
+const petsCards=pets? [lastCard, ...pets]: null;
+  const isOnboarded = userProfile?.user?.petPreference;
+  const isAdmin = userProfile?.user?.isAdmin;
 
-  const dispach = useDispatch()
 
-  // fetch prefered pets
+  let showInfo = "";
+  const outOfFrame = function (name) {
+    setRemovedPet(name);
+  };
+  const swiped = function (direction, pet) {
+    setLastDirection(direction);
 
-  useEffect(() => {
-    dispach(fetchPetsAction())
-  }, [dispach])
+
+    // call action to update matches when one swipes right
+    if (direction === "right") {
+      return dispatch(updateMatchesAction(pet));
+    }
+  };
+
+  const showInfoFunc = () => {
+    showInfo =
+      lastDirection === "right"
+        ? removedPet + " was added to favourites"
+        : lastDirection === "left"
+        ? removedPet + " left the screen"
+        : lastDirection === "up"
+        ? removedPet + " left the screen"
+        : lastDirection === "down"
+        ? removedPet + " left the screen"
+        : "";
+    return showInfo;
+  }; // fetch prefered pets
+  const swipeAction= showInfoFunc();
+
   return (
     <>
-      <Nav authToken={authToken} />
-      {pets?.map((pet) =>
-        <TinderCard
-          className='swipe'
-          key={pet.name}
-          onSwipe={(dir) => swiped(dir, pet.name)}
-          onCardLeftScreen={() => outOfFrame(pet.name)}>
-
-          <div className='dashboard' >
-            <div className='pet-container'>
-              <div className='pet'>
-                <div className='pet-header'>
-                  <h4>{pet?.name} {pet?.age} year old </h4>
-                  <h4> {pet?.gender} {pet?.breed} Breed</h4>
-
-                </div>
-                <div className='pet-details'>
-                  <p><i class="bi bi-emoji-smile"></i> {pet?.children === "yes" ? "I am friendly to kinds below 8 years" : "I have not been socialised with kids in the past"}</p>
-                  <p><i class="bi bi-emoji-smile"></i> {pet?.active === "yes" ? "I am  adventurerous and love playing a lot " : "I am a laid back dog.I may not be playful but I love talking walks"}</p>
-                  <p><i class="bi bi-emoji-smile"></i> {pet?.petTorrelance === "none" ? "I am not good with other pets"
-                    : pet?.petTorrelance === "both" ? "I can comfortably live with both cats and dogs"
-                    : `I am fine living with only ${pet?.petTorrelance}`}</p>
-                  <p><i class="bi bi-emoji-smile"></i> {pet?.garden==="yes"? "My ideal home is the one with a secure compound with access to a garden": "I don't require access to a garden but having one would be great"}</p>
-
-                </div>
-                <div className='pet-background'>
-                  <h4>Backgroud: </h4>
-                  <p> {pet?.about}</p>
-                </div>
-
-              </div>
-            </div>
-            <div className='swiper-container'>
-              <div className='card-container'>
-
-
-
-                <div style={{ backgroundImage: "url(" + pet.image + ")" }} className='card'>
-                  <h3>{pet.name}</h3>
-                </div>
-                <div className='swipe-info'>
-                  {lastDirection ? <p>You swiped {lastDirection}</p> : null}
-                </div>
-
-
-              </div>
-
-            </div>
+      <Nav authToken />
+      <div className="md:mx-20 mt-16 ">
+        <div className="w-11/12 fixed justify-center text-xs md:text-lg">
+          {isAdmin || isOnboarded ? (
+            <p >
+              Swipe Right to add a Pet to Favourites, or Left to Remove it from
+              Dashboard
+            </p>
+          ) : (
+            <p>
+              Please complete the{" "}
+              <a href="/onboarding" className="text-blue-500">
+                registration process
+              </a>
+            </p>
+          )}
+          <div className="mt-2 text-blue-600">
+            {removedPet && swipeAction}
           </div>
-        </TinderCard>)}
-    </>);
+        </div>
+        {showModal && (
+                  <PetProfileModal
+                    setShowModal={setShowModal}
+                    pet={selectedPet}
+                  />
+                )}
+        {/* Errors */}
+        {petAppErr || petServerErr ? (
+          <div className="form-validation" role="alert">
+            {petServerErr} {petAppErr}
+          </div>
+        ) : null}
+   
+        {petLoading ? (
+          <LoadingComponent />
+        ) : (
+          petsCards?.map((pet) => (
+            <TinderCard
+              className="swipe"
+              key={pet._id}
+              onSwipe={(dir) => swiped(dir, pet)}
+              onCardLeftScreen={() => outOfFrame(pet.name)}
+            >
+              <div className="dashboard mt-24">
+                <div className="pet-header-small-screen">
+                 {pet?.name !=="Last Card" && <button
+                    className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full  w-48 py-2  shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                    onClick={() => {
+                      setShowModal(true);
+                      setSelectedPet(pet)
+                    }}
+                    onTouchStart={() => {
+                      setShowModal(true);
+                      setSelectedPet(pet)
+                    }}
+                  >
+                    {pet?.name}'s Profile
+                  </button>}
+                  {pet?.name ==="Last Card" && <button
+                    className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full  w-48 py-2  shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                    onClick={() => {
+                  navigate("/favourite-pets")
+                    }}
+                    onTouchStart={() => {
+                      navigate("/favourite-pets")
+                    }}
+                  >
+                   Favourites
+                  </button>}
+                </div>
+             
+     
+                <div className="swiper-container">
+                  <div className="card-container" key={pet._id}>
+                    <div
+                      style={{ backgroundImage: "url(" + pet.image + ")" }}
+                      className="card"
+                    >
+                     {pet?.name=== "Last Card"? <h2>Congratulations! You're all caught up! <Link to="/favourite-pets" className="text-blue-500 underline" onTouchStart={()=> navigate("/favourite-pets")}>View your favourite pets</Link></h2>: <h3>{pet.name}</h3>}
+                    </div>
+                  </div>
+                  
+                </div>
+                
+              </div>
+              
+            </TinderCard>
+          ))
+        )}
+        </div>
+    
+    </>
+  );
 };
