@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { Authmodal } from "../components/Authmodal";
+import LoadingComponent from "../components/LoadingSpinner";
 import { Nav } from "../components/navigation/Nav";
 import { fetchAllpetsAction } from "../redux/petsSlices";
 import { logout } from "../redux/usersSlices";
@@ -139,7 +140,7 @@ export const Home = () => {
           Pets Availabe for Adoption
         </p>
         <div className="flex flex-row flex-wrap items-center justify-between pr-5 pl-3">
-          {selectedPets?.map((pet) => (
+          {petsLoading? <LoadingComponent />:  selectedPets?.map((pet) => (
             <div
               className="bg-white w-40 md:w-60 h-56 md:h-72 mt-8 md:mt-12 rounded shadow-xl flex flex-col md:mx-12  "
               key={pet?.petId}
