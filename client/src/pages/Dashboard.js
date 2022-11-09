@@ -46,6 +46,8 @@ export const Dashboard = () => {
 const lastCard= {_id:"123", name: "Last Card"}
 const petsCards=pets? [lastCard, ...pets]: null;
   const isOnboarded = userProfile?.user?.petPreference;
+  const isAdmin = userProfile?.user?.isAdmin;
+
 
   let showInfo = "";
   const outOfFrame = function (name) {
@@ -81,7 +83,7 @@ const petsCards=pets? [lastCard, ...pets]: null;
       <Nav authToken />
       <div className="md:mx-20 mt-16 ">
         <div className="w-11/12 fixed justify-center text-xs md:text-lg">
-          {isOnboarded ? (
+          {isAdmin || isOnboarded ? (
             <p >
               Swipe Right to add a Pet to Favourites, or Left to Remove it from
               Dashboard

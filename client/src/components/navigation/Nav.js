@@ -54,6 +54,15 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
                 Home
               </Link>
             </li>
+            <li className=" mr-96 md:mr-3  ">
+              <Link
+                onClick={() => setIsOpenMenu(!isOpenMenu)}
+                className="inline-block  py-2 px-4 text-black font-bold no-underline "
+                to="/"
+              >
+                Resources
+              </Link>
+            </li>
            
             {userLogin &&  <> <li className="mr-96 md:mr-3 ">
               <Link
@@ -90,7 +99,7 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
            
           </ul>
           <button        
-            className="mx-auto mr-96 lg:mx-0 hover:underline bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+            className="mx-auto mr-96 lg:mx-0 hover:underline bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full mt-4 lg:mt-0 py-2 px-6 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
 
             onClick={
               userLogin
@@ -98,7 +107,8 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
                 : () => {            //                 //     
                     setIsOpenMenu(false);
                     setShowModal(true);
-                    setIsSignUp(false)
+                    setIsSignUp(false);
+                    window.scrollTo(0, 0);
                   }
             }
           >

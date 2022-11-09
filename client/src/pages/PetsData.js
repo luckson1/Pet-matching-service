@@ -10,6 +10,7 @@ function PetsData() {
   const [pets, setPets] = useState([]);
   const dispatch = useDispatch();
   const location = useLocation();
+  console.log(location)
   const selectedPetsIds = location?.state;
   useEffect(() => {
     dispatch(fetchAllpetsAction());
@@ -18,9 +19,9 @@ function PetsData() {
   const petsData = useSelector((state) => state?.pets?.allPets?.pets);
 
   useEffect(() => {
-    if (typeof petsData !== "undefined" && selectedPetsIds === null)
+    if (petsData  && !selectedPetsIds)
       setPets(petsData);
-    if (typeof petsData !== "undefined" && selectedPetsIds !== null) {
+    if (petsData  && selectedPetsIds) {
       // filter pets selected by a user as their favourite or based on type of pet
       let filteredPets = petsData?.filter((pet) =>
         selectedPetsIds?.includes(pet?._id)

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
+import { useSelector } from "react-redux";
 import Cat from "../components/images/Cat.jpg";
 import DeleteDialogBox from "./DeleteDialogBox";
 import { PetOnboarding } from "./PetOnboarding";
@@ -17,6 +18,13 @@ function PetsList({ pets, setPets }) {
     setIsEdit(false);
   
   };
+
+  //user state
+  const userId=useSelector(state=> state?.users?.userAuth?.user?.userId)
+  console.log(userId)
+
+  //condition to only allow editing of pets only  donated by current user
+  const editPetAllowed= pet=> pet.donor=== userId
   return (
     <>
    
@@ -64,23 +72,29 @@ function PetsList({ pets, setPets }) {
                 className="col col-4 flex flex-row gap-5 cursor-pointer"
                 data-label="Breed"
               >
-                <BiEdit
-                  color="orange"
-                  size={"20px"}
-                  onClick={() => {
-                    setIsEdit(true);
-                    setShowForm(true);
-                    setSelectedPet(pet);
-                  }}
-                />
-                <MdDeleteForever
-                  color="red"
-                  size={"20px"}
-                  onClick={() => {
-                    setShowDeleteModal(true);
-                    setSelectedPet(pet);
-                  }}
-                />
+
+{editPetAllowed(pet) ?  (     
+  <>
+       <BiEdit
+              color="orange"
+              size={"20px"}
+              onClick={() => {
+                setIsEdit(true);
+                setShowForm(true);
+                setSelectedPet(pet);
+              }}
+            />
+            <MdDeleteForever
+              color="red"
+              size={"20px"}
+              onClick={() => {
+                setShowDeleteModal(true);
+                setSelectedPet(pet);
+              }}
+            />
+            </>
+            ): "None"}
+
               </div>
             </li>
           ))}

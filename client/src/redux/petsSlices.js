@@ -98,6 +98,34 @@ export const fetchAllpetsAction = createAsyncThunk(
     }
   }
 );
+
+// get all pets uploaded by a particular doner
+export const fetchDonerpetsAction = createAsyncThunk(
+  "doner/pet/fetch",
+  async (payload, { rejectWithValue, getState, dispatch }) => {
+    //get user token from store
+    const userToken = getState()?.users?.userAuth?.token;
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+    };
+
+    try {
+      //make http call here
+
+      const { data } = await axios.get(`${BaseURL}/pets/doner`, config);
+      return data;
+    } catch (error) {
+      if (!error?.response) {
+        throw error;
+      }
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 //get   pets by gender
 
 export const fetchPetsAction = createAsyncThunk(
@@ -294,6 +322,25 @@ const PetsSlices = createSlice({
       state.petServerErr = action?.error?.msg;
     });
 
+
+    //fetch pets uploaded by a given donor
+     //handle pending state
+     builder.addCase(fetchDonerpetsAction.pending, (state, action) => {
+      state.petsLoading = true;
+    });
+
+    //hande success state
+    builder.addCase(fetchDonerpetsAction.fulfilled, (state, action) => {
+      state.donerPets = action?.payload;
+      state.petsLoading = false;
+    });
+    //hande rejected state
+
+    builder.addCase(fetchDonerpetsAction.rejected, (state, action) => {
+      state.petsLoading = false;
+      state.petAppErr = action?.payload?.msg;
+      state.petServerErr = action?.error?.msg;
+    });
     //  fetch all pet pets by gender
     //handle pending state
     builder.addCase(fetchPetsAction.pending, (state, action) => {

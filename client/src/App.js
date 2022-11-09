@@ -6,6 +6,7 @@ import { Whatsapp } from './components/whatsapp';
 import { AdminDashboard } from './pages/AdminDashboard';
 import AdoptersData from './pages/AdoptersData';
 import { Dashboard } from './pages/Dashboard';
+import { DonerOnboarding } from './pages/DonerOnBoarding';
 import { FavouritePets } from './pages/FavouritePets';
 import { Home } from './pages/Home';
 import { Onboarding } from './pages/Onboarding';
@@ -26,6 +27,8 @@ function App() {
           </AdminRoute>} />
         <Route exact path="/onboarding" element={
             <Onboarding />} />
+                  <Route exact path="/doner-onboarding" element={
+            <DonerOnboarding />} />
         <Route exact path="/favourite-pets" element={<ProtectedRoute>
             <FavouritePets />
           </ProtectedRoute>} />

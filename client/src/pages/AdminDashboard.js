@@ -5,21 +5,22 @@ import Cat from "../components/images/Cat.jpg";
 import Dog from "../components/images/Dog.jpg";
 import AdminDashboardCard from "../components/AdminDashboardCard";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllpetsAction } from "../redux/petsSlices";
+import { fetchDonerpetsAction } from "../redux/petsSlices";
 import { fetchAllUsersAction } from "../redux/usersSlices";
 import { PetOnboarding } from "../components/PetOnboarding";
 export const AdminDashboard = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAllpetsAction());
+    dispatch(fetchDonerpetsAction());
     dispatch(fetchAllUsersAction());
   }, []);
 
   const [showForm, setShowForm] = useState(false);
+
   const closeFormHandler = () => {
     setShowForm(false)
   };
-  const petsData = useSelector((state) => state?.pets?.allPets?.pets);
+  const petsData = useSelector((state) => state?.pets?.donerPets?.pets);
 
   const usersData = useSelector((state) => state?.users?.allUsers?.users);
   //get ids of Dogs
@@ -58,6 +59,7 @@ export const AdminDashboard = () => {
   noPreferenceAdopters?.map((adopter) =>
     noPreferenceAdopterIds.push(adopter?._id)
   );
+  const isEdit=true
   return (
     <section>
       <Nav />
@@ -93,17 +95,19 @@ export const AdminDashboard = () => {
         />
         <AdminDashboardCard
           src={Dog}
-          title={`${dogs?.length} Dogs Available for Adoption`}
+          title={`${dogs?.length} Dogs You have put on Adoption`}
           buttonText={"View"}
           redirectionUrl={"/all-Pets"}
           state={dogIds}
+          editPet="allowed"
         />
         <AdminDashboardCard
           src={Cat}
-          title={`${cats?.length} Cats Available for Adoption`}
+          title={`${cats?.length} Cats You Have Put on Adoption`}
           buttonText={"View"}
           redirectionUrl={"/all-Pets"}
           state={catIds}
+          editPet="allowed"
         />
       </div>
       {showForm && (

@@ -7,6 +7,7 @@ export default function AdminDashboardCard({
   redirectionUrl,
   buttonText,
   state,
+ editPet
 }) {
   const navigate = useNavigate();
   return (
@@ -15,7 +16,7 @@ export default function AdminDashboardCard({
       <p className="w-56 text-left">{title}</p>
       <button
         className=" bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 text-gray-900 font-bold rounded-lg w-24 h-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-        onClick={() => navigate(redirectionUrl, (state = { state }))}
+        onClick={() => navigate(redirectionUrl, (state = { state , editPet}))}
       >
         {buttonText}
       </button>

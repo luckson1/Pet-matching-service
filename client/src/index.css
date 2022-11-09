@@ -33,15 +33,20 @@ nav {
 
 .overlay {
   width: 100vw;
-  height: 100vh;
-  position: fixed;
-  background: url("./components/images/Dog.jpg");
-  background-size: contain;
+  height: 100%;
+  background: url("./components/images/RTV.jpg");
+  background-size: cover
+}
+@media screen and (max-width: 768px) {
+
+.overlay {
+width: 100vw;
+height: 50vh;
+background: url("./components/images/Dog.jpg");
+background-size: cover;
+}
 }
 
-.home {
-  margin-top: 15vh;
-}
 
 /* -----authmodal---------- */
 
@@ -98,12 +103,12 @@ nav {
   display: flex;
   flex-direction: column;
   width: 80%;
-  padding: 10px;
+  padding: 5px;
   text-align: start;
 }
 
 .onboarding form input {
-  padding: 5px 30px;
+  padding: 10px 20px;
   margin: 5px 0px;
   font-size: 15px;
   border: solid 1px rgb(219, 219, 219);
@@ -162,6 +167,12 @@ nav {
 }
 .onboarding form input[type="submit"]:active {
   background-color: rgb(221, 15, 90);
+}
+.onboarding .toggle-icon {
+  margin-left: 260px;
+  margin-top: -35px;
+  cursor: pointer;
+  font-size: large;
 }
 
 /* ------------------Dashboard-------------------- */
