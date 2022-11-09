@@ -69,7 +69,7 @@ export const Home = () => {
                 authToken ? dispatch(logout()) : setShowModal(true);
               }}
             >
-              {authToken ? "Sign Out" : "Get a Pet"}
+              {authToken ? "Sign Out" : "Adopt a Pet"}
             </button>
             {!authToken && (
               <>
@@ -80,7 +80,7 @@ export const Home = () => {
                     navigate("/doner-onboarding");
                   }}
                 >
-                  Donate a Pet
+                  Put Your Pet on Adoption
                 </button>
               </>
             )}
