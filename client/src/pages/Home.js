@@ -64,7 +64,7 @@ export const Home = () => {
 
           <div className="mt-6 md:mt-56 mx-10 flex flex-col items-center md:flex-row md:gap-5  md:px-24">
             <button
-              className="w-64 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-gray-900 font-bold rounded-full mb-2 py-3  md:py-4 px-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+              className="w-72 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-gray-900 font-bold rounded-full mb-2 py-3  px-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
               onClick={() => {
                 authToken ? dispatch(logout()) : setShowModal(true);
               }}
@@ -75,7 +75,7 @@ export const Home = () => {
               <>
                 <h1 className="text-3xl">Or</h1>
                 <button
-                  className=" w-64  bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-gray-900 font-bold rounded-full mb-2 py-3 md:py-4  px-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                  className=" w-72  bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-gray-900 font-bold rounded-full mb-2 py-3  px-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                   onClick={() => {
                     navigate("/doner-onboarding");
                   }}
