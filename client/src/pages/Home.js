@@ -56,7 +56,7 @@ export const Home = () => {
         setIsSignUp={setIsSignUp}
       />
 
-      <div className="w-screen h-3/6">
+      <div className="w-screen h-3/6 sm:h-4/6">
         <div className=" overlay mt-16 bg-no-repeat overflow-visible">
           <p className=" text-xl md:text-2xl text-violet-500 mx-3 ">
             Find your new best friend, or rehome your pet
@@ -77,7 +77,7 @@ export const Home = () => {
                 <button
                   className=" w-72  bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-gray-900 font-bold rounded-full mb-2 py-3  px-8 shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                   onClick={() => {
-                    navigate("/doner-onboarding");
+                    navigate("/doner-onboarding ");
                   }}
                 >
                   Put Your Pet on Adoption
@@ -97,7 +97,7 @@ export const Home = () => {
       </div>
       <div className="relative  bg-gradient-to-r from-indigo-400
        ">
-        <div className="md:hidden h-12"></div>
+        <div className="sm:hidden h-12"></div>
         <svg
           viewBox="0 0 1428 174"
           version="1.1"
@@ -194,7 +194,7 @@ export const Home = () => {
           </div>
         </div>
         <svg
-          className="wave-top   bg-gradient-to-r from-indigo-400 via-purple-200 to-indigo-200"
+          className="wave-top   bg-gradient-to-r from-indigo-400 via-purple-200 to-indigo-200 mt-20"
           viewBox="0 0 1439 147"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
