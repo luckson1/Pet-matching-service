@@ -11,6 +11,7 @@ import { FavouritePets } from './pages/FavouritePets';
 import { Home } from './pages/Home';
 import { Onboarding } from './pages/Onboarding';
 import PetsData from './pages/PetsData';
+import RegistrationSuccess from './pages/RegistrationSuccess';
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
             <DonerOnboarding />} />
         <Route exact path="/favourite-pets" element={<ProtectedRoute>
             <FavouritePets />
+          </ProtectedRoute>} />
+          <Route exact path="/register-success" element={<ProtectedRoute>
+            <RegistrationSuccess />
           </ProtectedRoute>} />
           <Route exact path="/adopters" element={<ProtectedRoute>
             <AdoptersData />
