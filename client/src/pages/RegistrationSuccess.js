@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import success from "./images/success.svg";
+import success from "../components/images/success.svg";
 const RegistrationSuccess = () => {
   return (
     <div
