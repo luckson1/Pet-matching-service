@@ -67,7 +67,7 @@ dispatch(registerUserAction(values))
 
   useEffect(() => {
     if (isRegistered) {
-      return navigate("/admin-dashboard");
+      return navigate("/register-success");
     }
   }, [isRegistered, navigate]);
   return (
