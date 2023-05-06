@@ -13,6 +13,7 @@ import {
   fetchUserProfileAction,
   updateMatchesAction,
 } from "../redux/usersSlices";
+import { toast, Toaster } from "react-hot-toast";
 
 export const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
@@ -30,7 +31,9 @@ export const Dashboard = () => {
   useEffect(() => {
     dispatch(fetchUserProfileAction());
   }, [dispatch]);
-
+useEffect(()=> {
+toast(" Swipe Right to add a Pet to Favourites, or Left to Remove it from dashboard", {duration: 10000});
+}, [])
   // get state from the store
   const user = useSelector((state) => {
     return state?.users;
@@ -81,22 +84,22 @@ const petsCards=pets? [lastCard, ...pets]: null;
   return (
     <>
       <Nav authToken />
+    
       <div className="md:mx-20 mt-16 ">
+      <Toaster
+      position="top-right"
+      reverseOrder={false} />
         <div className="w-11/12 fixed justify-center text-xs md:text-lg">
-          {isAdmin || isOnboarded ? (
-            <p >
-              Swipe Right to add a Pet to Favourites, or Left to Remove it from
-              Dashboard
-            </p>
-          ) : (
+          {!isAdmin && !isOnboarded &&   (
             <p>
               Please complete the{" "}
               <a href="/onboarding" className="text-blue-500">
                 registration process
+               
               </a>
             </p>
           )}
-          <div className="mt-2 text-blue-600">
+          <div className=" -mt-8 text-center">
             {removedPet && swipeAction}
           </div>
         </div>
@@ -123,7 +126,7 @@ const petsCards=pets? [lastCard, ...pets]: null;
               onSwipe={(dir) => swiped(dir, pet)}
               onCardLeftScreen={() => outOfFrame(pet.name)}
             >
-              <div className="dashboard mt-24">
+              <div className="dashboard">
                 <div className="pet-header-small-screen">
                  {pet?.name !=="Last Card" && <button
                     className=" bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full  w-48 py-2  shadow focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
