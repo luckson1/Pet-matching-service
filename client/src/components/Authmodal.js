@@ -66,17 +66,19 @@ export const Authmodal = ({ setShowModal, isSignUp, setIsSignUp }) => {
   });
 
   return (
-    <div className="auth-modal bg-gradient-to-b from-sky-300 via-fuchsia-300 to-cyan-300">
-      <div
+    <div className="auth-modal bg-gradient-to-b from-primary  to-base-100 ">
+     <div className="my-8">
+     <div
         onClick={() => {
           setShowModal(false);
           setIsSignUp(true);
         }}
-        className="close-icon"
+        className="close-icon text-white"
       >
         <i className="bi bi-file-excel"></i>
       </div>
-      <h1>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h1>
+      <h1 className="text-white">{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h1>
+     </div>
    
       {/* Errors */}
       {userAppErr || userServerErr ? (
@@ -141,13 +143,13 @@ export const Authmodal = ({ setShowModal, isSignUp, setIsSignUp }) => {
           ></i>
         </div>
         {/* Err */}
-        <div className="form-validation">
+        <div className="form-validation mt-3">
           {formik.touched.password && formik.errors.password}
         </div>
         {userLoading ? (
           <DisabledButton />
         ) : (
-          <button type="submit" className="mt-5 py-2 px-20 border-solid bg-sky-600 rounded-3xl">
+          <button type="submit" className="mt-5 btn btn-secondary">
             {isSignUp ? "Sign Up" : "Login"}
           </button>
         )}

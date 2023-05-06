@@ -1,12 +1,9 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import {  useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { MdClose, MdMenu } from "react-icons/md";
 import { logout } from "../../redux/usersSlices";
 import logo from "../images/logo.png";
 export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
-
-  const [isOpenMenu, setIsOpenMenu] = useState(false); 
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,108 +12,75 @@ export const Nav = ({ authToken, setShowModal, showModal, setIsSignUp}) => {
 
 
   return (
-    <nav
-      className="fixed w-12/12 z-30 top-0  px-10 bg-white"
-    >
-      <div className="flex justify-center items-center h-12 w-12 mt-3 ml-2">
-        <img
-          className="logo"
+    <div className="navbar bg-secondary px-5 md:px-10 lg:px-20">
+  <div className="navbar-start">
+    <div className="dropdown">
+      <label tabIndex={0} className="btn btn-ghost lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+      </label>
+      <ul tabIndex={0} className="menu menu-compact dropdown-content dropdown-bottom mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a href="https://tnrtrust.org/news/"   target="_blank"  rel="noreferrer" >Resources</a></li>
+        <li tabIndex={0}>
+          <button className="justify-between">
+          Get Started
+            <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+          </button>
+          <ul className="p-2 bg-base-100 z-100 shadow shadow-primary/100">
+          <li><button      onClick={() => {
+                authToken ? navigate("/dashboard") : setShowModal(true);
+              }}>Adopt a pet</button></li>
+          <li><button    onClick={() => {
+                    navigate("/doner-onboarding");
+                  }}>Rehome a pet</button></li>
+        </ul>
+        </li>
+        <li><a href="https://tnrtrust.org/get-involved-2/"  target="_blank"  rel="noreferrer">Get Involved</a></li>
+      </ul>
+    </div>
+    <img
+          className="h-10 w-10 rounded-full"
           src={logo}
           alt="logo"
           onClick={() => {
             navigate("/");
           }}
         />
-      </div>
-      <div className="w-full mx-auto flex flex-wrap items-center justify-between mt-0 py-2 bg-white">
-        <div className="pl-4 flex items-center"></div>
-        <div className="block lg:hidden pr-4">
-          <button
-            onClick={() => setIsOpenMenu(!isOpenMenu)}
-            id="nav-toggle"
-            className="flex items-center p-1 text-gray-900 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-          >
-            {isOpenMenu ? <MdClose /> : <MdMenu />}
-          </button>
-        </div>
-        <div
-          className={`w-full flex-grow md:flex md:items-center md:w-auto ${
-            isOpenMenu ? "" : "hidden"
-          } mt-2 md:mt-0 bg-white  text-black p-0 z-10" `}
-        >
-          <ul className="list-reset md:flex  flex-1 items-center ">
-            <li className=" mr-96 md:mr-3  ">
-              <Link
-                onClick={() => setIsOpenMenu(!isOpenMenu)}
-                className="inline-block  py-2 px-4 text-black font-bold no-underline "
-                to="/"
-              >
-                Home
-              </Link>
-            </li>
-            <li className=" mr-96 md:mr-3  ">
-              <Link
-                onClick={() => setIsOpenMenu(!isOpenMenu)}
-                className="inline-block  py-2 px-4 text-black font-bold no-underline "
-                to="/"
-              >
-                Resources
-              </Link>
-            </li>
-           
-            {userLogin &&  <> <li className="mr-96 md:mr-3 ">
-              <Link
-                onClick={() => setIsOpenMenu(!isOpenMenu)}
-                className="inline-block text-black no-underline hover:text-gray-900 hover:text-underline py-2 px-4"
-                to="/dashboard"
-              >
-               Dashboard
-              </Link>
-            </li>
-            <li className="mr-96 md:mr-3 ">
-              <Link
-                onClick={() => setIsOpenMenu(!isOpenMenu)}
-                className="inline-block text-black no-underline hover:text-gray-900 hover:text-underline py-2 px-4"
-                to="/favourite-pets">
-                Favourites
-              </Link>
-            </li>
-           
-              <li className="mr-96 md:mr-3 ">
-                <Link
-                  // onClick={() => {
-                  //   setIsOpenMenu(!isOpenMenu);
-                  //   setActiveMenu(true);
-                  //   setShowNavBar(true);
-                  // }}
-                  className="inline-block text-black no-underline hover:text-gray-900 hover:text-underline py-2 px-4"
-                  to="/admin-dashboard"
-                >
-                  Admin
-                </Link>
-              </li>
-              </>}
-           
-          </ul>
-          <button        
-            className="mx-auto mr-96 lg:mx-0 hover:underline bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gray-900 font-bold rounded-full mt-4 lg:mt-0 py-2 px-6 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-
-            onClick={
+  </div>
+  <div className="navbar-center hidden lg:flex">
+    <ul className="menu menu-horizontal px-1">
+      <li><a href="https://tnrtrust.org/news/"   target="_blank"  rel="noreferrer" >Resources</a></li>
+      <li tabIndex={0}>
+        <button>
+          Get Started
+          <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
+        </button>
+        <ul className="p-2 bg-base-100 z-100 shadow shadow-primary/100">
+          <li><button      onClick={() => {
+                authToken ? navigate("/dashboard") : setShowModal(true);
+              }}>Adopt a pet</button></li>
+          <li><button    onClick={() => {
+                    navigate("/doner-onboarding");
+                  }}>Rehome a Pet</button></li>
+        </ul>
+      </li>
+      <li><a href="https://tnrtrust.org/get-involved-2/"  target="_blank"  rel="noreferrer">Get Involved</a></li>
+    </ul>
+  </div>
+  <div className="navbar-end">
+    <button className="btn btn-primary"     onClick={
               userLogin
                 ? () => dispatch(logout())
-                : () => {            //                 //     
-                    setIsOpenMenu(false);
+                : () => {             
+                  
                     setShowModal(true);
                     setIsSignUp(false);
                     window.scrollTo(0, 0);
                   }
             }
           >
-            {userLogin ? "Logout" : "Login"}
-          </button>
-        </div>
-      </div>
-      <hr className="border-b border-gray-100 opacity-25 my-0 py-0" />
-    </nav>
+            {userLogin ? "Logout" : "Login"}</button>
+  </div>
+</div>
+  
   );
 };
